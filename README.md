@@ -76,7 +76,7 @@ View a comprehensive overview of your financial status, including expenses, inco
 ### Backend (Laravel)
 - **Language**: PHP
 - **Framework**: Laravel 11
-- **Database**: MySQL/PostgreSQL (or any supported DBMS)
+- **Database**: MySQL
 - **API**: RESTful API using Laravel Sanctum for Authentication
 
 <br>
