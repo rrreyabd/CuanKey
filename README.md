@@ -71,7 +71,7 @@ View a comprehensive overview of your financial status, including expenses, inco
 - **Language**: Kotlin
 - **Android SDK**: AndroidX, Jetpack libraries
 - **Networking**: Retrofit for API requests
-- **Local Database**: Room (optional)
+- **Local Database**: Room
 
 ### Backend (Laravel)
 - **Language**: PHP
