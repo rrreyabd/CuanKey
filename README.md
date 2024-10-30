@@ -8,8 +8,8 @@
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Team](#team)
+2. [Team](#team)
+3. [Features](#features)
 4. [Tech Stack](#tech-stack)
 5. [Prerequisites](#prerequisites)
 6. [Installation](#installation)
@@ -24,14 +24,14 @@
 
 Meet the team that made this project possible:
 
-| Name                            | NIM         | Role                | GitHub Profile                                            |
-| ------------------------------- | ----------- | ------------------- | --------------------------------------------------------- |
-| Muhammad Raihan Abdillah Lubis  | 221402009   | TBA                 | [rrreyabd](https://github.com/rrreyabd)                   |
-| Fadillah Emilia Nasution        | 221402034   | TBA                 | [fadillahemilianst](https://github.com/fadillahemilianst) |
-| Alwin Liufandy                  | 221402037   | Backend Developer   | [Winzliu](https://github.com/Winzliu)                     |
-| Devandra Deal Fatahilah         | 221402040   | TBA                 | [devandra1112](https://github.com/devandra1112)           |
-| Jessindy Tanuwijaya             | 221402062   | TBA                 | [jessdytan](https://github.com/jessdytan)                 |
-| Julyant Anggara                 | 221402109   | TBA                 | [julyantanggara](https://github.com/julyantanggara)       |
+| Name                            | NIM         | GitHub Profile                                            | Role                         |
+| ------------------------------- | ----------- | --------------------------------------------------------- | ---------------------------- |
+| Muhammad Raihan Abdillah Lubis  | 221402009   | [rrreyabd](https://github.com/rrreyabd)                   | Project Manager & Front-End  |
+| Fadillah Emilia Nasution        | 221402034   | [fadillahemilianst](https://github.com/fadillahemilianst) | UI/UX & Technical Writer     |
+| Alwin Liufandy                  | 221402037   | [Winzliu](https://github.com/Winzliu)                     | Back-End & Front-End         |
+| Devandra Deal Fatahilah         | 221402040   | [devandra1112](https://github.com/devandra1112)           | UI/UX & Technical Writer     |
+| Jessindy Tanuwijaya             | 221402062   | [jessdytan](https://github.com/jessdytan)                 | UI/UX & Back-End             |
+| Julyant Anggara                 | 221402109   | [julyantanggara](https://github.com/julyantanggara)       | Technical Writer & Front-End |
 
 We worked together to bring this project to life and continue to maintain and improve it.
 
