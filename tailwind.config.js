@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
@@ -13,7 +13,9 @@ module.exports = {
         lightGray: "#dfdfdf",
         charcoalGray: "#20252a",
         vividGreen: "#00B553",
+        darkGreen: "#077c3f",
         customRed: "#E9482B",
+        deepCharcoal: "#151A1F",
       }
     },
   },
