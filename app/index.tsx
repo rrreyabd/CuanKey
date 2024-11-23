@@ -2,22 +2,39 @@ import HeaderBalance from "@/components/HeaderBalance";
 import Navbar from "@/components/Navbar";
 import RecentTransactions from "@/components/RecentTransactions";
 import { transactions } from "@/data/placeholder";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
+import { UserData } from "@/data/types";
+import { checkLoginStatus, getToken } from "@/utils/auth";
+import { Link, router } from "expo-router";
+import { useEffect, useState } from "react";
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 
 export default function Index() {
   const [report, setReport] = useState(true);
 
+  useEffect(() => {
+    const verifyLogin = async () => {
+      const loggedIn = await checkLoginStatus();
+      if (!loggedIn) router.push("/auth/Login");
+    };
+
+    verifyLogin();
+  }, []);
+
   return (
-    <View className="flex-1 bg-black"> 
+    <View className="flex-1 bg-black">
       <ScrollView className="flex-1 px-4">
         <HeaderBalance balance={1500841000} />
 
         {/* My Wallets */}
         <View className="bg-charcoalGray rounded-xl p-4">
           <View className="justify-between flex-row pb-2">
-            <Text className="font-poppins text-white text-lg">My Wallets</Text>
+            <Text className="font-poppins text-white text-lg">My Wallet</Text>
 
             <Link href="/" className="text-vividGreen text-lg">
               See all

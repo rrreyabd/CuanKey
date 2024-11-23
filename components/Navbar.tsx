@@ -1,8 +1,10 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Animated, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Link, useRouter } from "expo-router";
+import { checkLoginStatus } from "@/utils/auth";
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
@@ -16,18 +18,26 @@ const Navbar = ({ className }: { className: string }) => {
       <View className="h-full flex-row justify-between">
         {/* Home */}
         <View className="w-2/12 pb-6 justify-end items-center">
-          <FontAwesome name="home" size={24} style={styles.icon} />
-          <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
-            Home
-          </Text>
+          <Link href="/">
+            <View className="items-center">
+              <FontAwesome name="home" size={24} style={styles.icon} />
+              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+                Home
+              </Text>
+            </View>
+          </Link>
         </View>
 
         {/* History */}
         <View className="w-2/12 pb-6 justify-end items-center">
-          <FontAwesome name="history" size={24} style={styles.icon} />
-          <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
-            History
-          </Text>
+          <Link href="/">
+            <View className="items-center">
+              <FontAwesome name="history" size={24} style={styles.icon} />
+              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+                History
+              </Text>
+            </View>
+          </Link>
         </View>
 
         {/* Transaction */}
@@ -49,18 +59,27 @@ const Navbar = ({ className }: { className: string }) => {
 
         {/* Budget */}
         <View className="w-2/12 pb-6 justify-end items-center">
-          <FontAwesome5 name="piggy-bank" size={22} style={styles.icon} />
-          <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
-            Budget
-          </Text>
+          <Link href="/">
+            <View className="items-center">
+              <FontAwesome5 name="piggy-bank" size={22} style={styles.icon} />
+              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+                Budget
+              </Text>
+            </View>
+          </Link>
         </View>
 
         {/* Account */}
         <View className="w-2/12 pb-6 justify-end items-center">
-          <FontAwesome name="user" size={24} style={styles.icon} />
-          <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
-            Account
-          </Text>
+          {/* <Link href="/auth/Login"> */}
+          <Link href="/Profile">
+            <View className="items-center">
+              <FontAwesome name="user" size={24} style={styles.icon} />
+              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+                Account
+              </Text>
+            </View>
+          </Link>
         </View>
       </View>
     </View>

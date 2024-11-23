@@ -1,9 +1,9 @@
 import { Stack } from "expo-router";
-import "../global.css";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
 import * as Font from "expo-font";
+import "../global.css";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -30,6 +30,8 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="Profile" options={{ headerShown: false }} />
+          <Stack.Screen name="auth/Login" options={{ headerShown: false }} />
+          <Stack.Screen name="auth/Register" options={{ headerShown: false }} />
         </Stack>
       </SafeAreaView>
     </SafeAreaProvider>
