@@ -177,6 +177,12 @@ For further information regarding the backend of Cuankey, you can see [cuankey-b
 
 <br>
 
+### UI Design
+
+[CuanKey's Figma](https://www.figma.com/design/4JClz8yn1yA6Heh1IJDeJP/CuanKey?node-id=0-1&t=Ans50G4ueOFaNMGR-1)
+
+<br>
+
 ## Screenshots
 
 TBA
