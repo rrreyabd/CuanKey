@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, useRouter } from "expo-router";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
-import AuthTextInput from "@/components/auth/AuthInput";
-import HeaderAuth from "@/components/auth/HeaderAuth";
+import AuthTextInput from "@/components/auths/AuthInput";
+import HeaderAuth from "@/components/auths/HeaderAuth";
 import { saveToken } from "@/utils/auth";
 import { ENDPOINTS } from "@/constants/api";
 
