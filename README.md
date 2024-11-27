@@ -66,7 +66,7 @@ View a comprehensive overview of your financial status, including expenses, inco
 ### Frontend (Mobile)
 - **Language**: JavaScript
 - **Framework**: React Native
-- **Tools**: Expo CLI for streamlined React Native development
+- **Tools**: Expo for streamlined React Native development
 - **Networking**: Fetch API for API requests
 - **Local State Management**: React Context API
 
