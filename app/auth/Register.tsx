@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import AuthTextInput from "@/components/Auth/AuthInput";
-import HeaderAuth from "@/components/Auth/HeaderAuth";
+import AuthTextInput from "@/components/auth/AuthInput";
+import HeaderAuth from "@/components/auth/HeaderAuth";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, useRouter } from "expo-router";
 import {
   Alert,
-  KeyboardAvoidingView,
-  Platform,
   Pressable,
   ScrollView,
   Text,
@@ -70,10 +68,7 @@ const Register = () => {
         <HeaderAuth title="Register" desc="Create your account here" />
 
         {/* Form */}
-        <KeyboardAvoidingView
-          className="gap-6 mt-8"
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+        <View className="gap-6 mt-8 h-[400px]">
           <AuthTextInput
             placeholder="Full Name"
             icon="user-circle"
@@ -93,7 +88,7 @@ const Register = () => {
             onChangeText={setPhone}
           />
           <AuthTextInput
-            placeholder="Password"
+            placeholder="Password (min. 8 characters)"
             icon="lock"
             value={password}
             onChangeText={setPassword}
@@ -106,7 +101,7 @@ const Register = () => {
             onChangeText={setConfirmPassword}
             secureTextEntry
           />
-        </KeyboardAvoidingView>
+        </View>
 
         {/* Submit Button */}
         <View className="items-center gap-6">
@@ -124,7 +119,7 @@ const Register = () => {
               </Pressable>
             </LinearGradient>
           </View>
-          </View>
+        </View>
 
         {/* Login Link */}
         <View className="mt-6">

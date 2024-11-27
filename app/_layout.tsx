@@ -1,15 +1,17 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
 import * as Font from "expo-font";
 import "../global.css";
+import { checkLoginStatus } from "@/utils/auth";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    async function loadFonts() {
+    const loadFonts = async () => {
       await Font.loadAsync({
         "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
         "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
@@ -18,8 +20,16 @@ export default function RootLayout() {
       setFontsLoaded(true);
     }
 
+    const checkLogin = async () => {
+      const loggedIn = await checkLoginStatus();
+      if (!loggedIn) {
+        router.push("/auth/Login");
+      }
+    };
+
+    checkLogin();
     loadFonts();
-  }, []);
+  }, [router]);
 
   if (!fontsLoaded) return null;
 

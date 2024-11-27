@@ -20,5 +20,17 @@ export interface UserData {
     fullname: string;
     email: string;
     phone_number: string;
-    password: string;
+    password?: string;
 }
+
+export interface UserWallet {
+    id: number;
+    name: string;
+    initial_balance: number;
+    total_income: number;
+    total_outcome: number;
+    total_balance: number;
+    is_active: number;
+    transactions: any[];
+    user: UserData;
+  }

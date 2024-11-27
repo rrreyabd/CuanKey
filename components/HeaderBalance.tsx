@@ -38,7 +38,7 @@ const HeaderBalance: React.FC<HeaderBalanceProps> = ({ balance }) => {
 
       <View className="justify-center">
         <View className="justify-center items-center border-2 border-white rounded-lg  aspect-square h-12">
-          <Link href="/Profile">
+          <Link href="./Profile">
             <MaterialIcons name="notifications" size={24} color="white" />
           </Link>
         </View>

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, useRouter } from "expo-router";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
-import AuthTextInput from "@/components/Auth/AuthInput";
-import HeaderAuth from "@/components/Auth/HeaderAuth";
-import { saveToken, saveUserData } from "@/utils/auth";
+import AuthTextInput from "@/components/auth/AuthInput";
+import HeaderAuth from "@/components/auth/HeaderAuth";
+import { saveToken } from "@/utils/auth";
 import { ENDPOINTS } from "@/constants/api";
 
 const Login = () => {
@@ -48,7 +48,7 @@ const Login = () => {
     <View className="flex-1 bg-black px-4">
       <ScrollView>
         <HeaderAuth title="Login" desc="Enter your credentials here" />
-        <View className="gap-6 mt-8">
+        <View className="gap-6 mt-8 h-[400px]">
           <AuthTextInput icon="envelope" placeholder="Email Address" value={email} onChangeText={setEmail} />
           <AuthTextInput icon="lock" placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
         </View>

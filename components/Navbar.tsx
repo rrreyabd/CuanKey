@@ -42,19 +42,21 @@ const Navbar = ({ className }: { className: string }) => {
 
         {/* Transaction */}
         <View className="w-3/12 h-full relative items-center">
-          <View className="absolute -top-6 justify-center items-center gap-1">
-            <View className="w-16 aspect-square rounded-full overflow-hidden">
-              <AnimatedLinearGradient
-                colors={["#00B553", "#077c3f"]}
-                className="w-16 aspect-square justify-center items-center"
-              >
-                <FontAwesome5 name="plus" size={30} color="white" />
-              </AnimatedLinearGradient>
+          <Link href="/">
+            <View className="absolute -top-6 justify-center items-center gap-1">
+              <View className="w-16 aspect-square rounded-full overflow-hidden">
+                <AnimatedLinearGradient
+                  colors={["#00B553", "#077c3f"]}
+                  className="w-16 aspect-square justify-center items-center"
+                >
+                  <FontAwesome5 name="plus" size={30} color="white" />
+                </AnimatedLinearGradient>
+              </View>
+              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+                Transaction
+              </Text>
             </View>
-            <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
-              Transaction
-            </Text>
-          </View>
+          </Link>
         </View>
 
         {/* Budget */}
@@ -72,7 +74,7 @@ const Navbar = ({ className }: { className: string }) => {
         {/* Account */}
         <View className="w-2/12 pb-6 justify-end items-center">
           {/* <Link href="/auth/Login"> */}
-          <Link href="/Profile">
+          <Link href="../Profile">
             <View className="items-center">
               <FontAwesome name="user" size={24} style={styles.icon} />
               <Text className="text-[#7D7D7D] font-poppins text-sm text-center">

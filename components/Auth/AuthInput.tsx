@@ -2,7 +2,7 @@ import { AuthTextInputProps } from "@/data/types";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { TextInput, View } from "react-native";
 
-const AuthTextInput: React.FC<AuthTextInputProps> = ({ placeholder, icon, value, onChangeText, secureTextEntry }) => {
+const AuthTextInput: React.FC<AuthTextInputProps> = ({ placeholder, icon, value, onChangeText }) => {
   return (
     <View className="bg-charcoalGray h-16 items-center rounded-xl flex-row border border-[#525B69] w-full">
       <View className="pl-8 w-2/12">
