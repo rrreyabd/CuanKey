@@ -168,20 +168,17 @@ View a comprehensive overview of your financial status, including expenses, inco
 ### Backend Setup (Laravel API)
 
 For further information regarding the backend of Cuankey, you can see [cuankey-backend](https://github.com/Winzliu/cuankey-backend)
-
-<br>
+<br> <br>
 
 ## API Documentation
 
 [CuanKey API Docs](https://api.julitasuu.site/docs/)
+<br> <br>
 
-<br>
-
-### UI Design
+## UI Design
 
 [CuanKey's Figma](https://www.figma.com/design/4JClz8yn1yA6Heh1IJDeJP/CuanKey?node-id=0-1&t=Ans50G4ueOFaNMGR-1)
-
-<br>
+<br> <br>
 
 ## Screenshots
 
