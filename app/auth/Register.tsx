@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AuthTextInput from "@/components/auths/AuthInput";
-import HeaderAuth from "@/components/auths/HeaderAuth";
+import AuthTextInput from "@/components/auth/AuthInput";
+import HeaderAuth from "@/components/auth/HeaderAuth";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, useRouter } from "expo-router";
 import {
