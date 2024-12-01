@@ -9,7 +9,7 @@ const DeleteAccount = () => {
   return (
     <View className="bg-black flex-1">
       <View className=" py-6 px-4 relative">
-        <BackHeader pageTitle="Delete Account" href="/profile/EditAccount" />
+        <BackHeader pageTitle="Delete Account" />
 
         <View className="items-center py-8">
           <Image source={require("@/assets/icons/red_warning.png")} />
@@ -50,7 +50,7 @@ const UnorderedList = (children: string) => {
   return (
     <View className="flex-row items-start gap-2">
       <Text className="text-white">•</Text>
-      <Text className="text-white font-poppins">{children}</Text>
+      <Text className="text-white font-poppins pr-4">{children}</Text>
     </View>
   );
 };

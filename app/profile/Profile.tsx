@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, Image, ScrollView } from "react-native";
+import { View, Text, Button, Image, ScrollView, Pressable } from "react-native";
 import { Link, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getToken } from "@/utils/auth";
@@ -17,9 +17,9 @@ const Profile = () => {
       <ScrollView className="py-6 px-4">
         <View className="justify-center items-center flex-1">
           <View className="flex-row justify-between w-full items-center">
-            <Link href="/">
+            <Pressable onPress={() => router.back()}>
               <FontAwesome5 name="chevron-left" size={24} color="#525B69" />
-            </Link>
+            </Pressable>
 
             <Text className="text-white font-poppinsSemibold text-lg">
               Profile

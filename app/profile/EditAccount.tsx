@@ -12,7 +12,7 @@ const EditAccount = () => {
   return (
     <View className="bg-black flex-1">
     <View className="py-6 px-4">
-      <BackHeader pageTitle="Profile" href="/profile/Profile" />
+      <BackHeader pageTitle="Profile" />
 
       <View className="py-8 gap-8 items-center w-full">
         <View className="bg-white rounded-full aspect-square overflow-hidden">
@@ -35,8 +35,9 @@ const EditAccount = () => {
       <View className="w-full border border-none border-t-white/50"></View>
 
       <View className="py-8 gap-4">
+
         {/* Change Account Data */}
-        <Link href="/">
+        <Link href="./ChangeAccountData">
           <View className="bg-deepCharcoal flex-row justify-between w-full p-4 rounded-md">
             <View className="gap-6 flex-row items-center">
               <Image
