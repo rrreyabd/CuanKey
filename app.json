@@ -4,7 +4,12 @@
     "slug": "CuanKey",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icons/cash_wallet.png",
+    "icon": "./assets/splash_screen/icon.png",
+    "splash": {
+      "image": "./assets/splash_screen/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "scheme": "Cuankey",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -19,17 +24,17 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/splash_screen/icon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "image": "./assets/splash_screen/icon.png",
+          "imageWidth": 300,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#000000"
         }
       ]
     ],

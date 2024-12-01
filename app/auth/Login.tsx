@@ -4,13 +4,14 @@ import { Link, useRouter } from "expo-router";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 import AuthTextInput from "@/components/auth/AuthInput";
 import HeaderAuth from "@/components/auth/HeaderAuth";
-import { saveToken } from "@/utils/auth";
+import { useAuth } from "@/context/AuthContext";
 import { ENDPOINTS } from "@/constants/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { login, setUserData } = useAuth();
   const router = useRouter();
 
   const handleLogin = async () => {
@@ -28,9 +29,9 @@ const Login = () => {
 
       if (response.ok) {
         const { data } = await response.json();
-
+        
         if (data.token) {
-          await saveToken(data.token);
+          await login(data.token, data);
           router.push("/");
         } else {
           Alert.alert("Error", "Token not found");

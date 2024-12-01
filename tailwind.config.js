@@ -16,6 +16,7 @@ module.exports = {
         darkGreen: "#077c3f",
         customRed: "#E9482B",
         deepCharcoal: "#151A1F",
+        subText: "#525B69",
       }
     },
   },

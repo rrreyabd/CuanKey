@@ -17,10 +17,12 @@ export interface AuthTextInputProps {
 }
 
 export interface UserData {
+    id?: number;
     fullname: string;
     email: string;
     phone_number: string;
     password?: string;
+    token?: string;
 }
 
 export interface UserWallet {
@@ -33,4 +35,23 @@ export interface UserWallet {
     is_active: number;
     transactions: any[];
     user: UserData;
-  }
+}
+
+export interface AuthContextProps {
+    isAuthenticated: boolean;
+    loading: boolean;
+    user: UserData | null;
+    login: (token: string, userData: UserData) => Promise<void>;
+    logout: () => Promise<void>;
+    setUserData: (userData: UserData) => void;
+    fetchUserData: () => Promise<UserData>;
+    handleDeleteAccount: () => Promise<void>;
+    handleLogout: () => Promise<void>;
+}
+
+export interface ButtonProps {
+    title: string;
+    onPress: () => void;
+    className?: string;
+    textClassName?: string;
+}

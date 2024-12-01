@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import * as Font from "expo-font";
 import "../global.css";
 import { checkLoginStatus } from "@/utils/auth";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -18,7 +19,7 @@ export default function RootLayout() {
         "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
       });
       setFontsLoaded(true);
-    }
+    };
 
     const checkLogin = async () => {
       const loggedIn = await checkLoginStatus();
@@ -34,15 +35,41 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView className="flex-1">
+    <SafeAreaProvider className="flex-1 bg-black">
+      <SafeAreaView className="flex-1 bg-black">
         <StatusBar barStyle="light-content" backgroundColor="#000000" />
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="Profile" options={{ headerShown: false }} />
-          <Stack.Screen name="auth/Login" options={{ headerShown: false }} />
-          <Stack.Screen name="auth/Register" options={{ headerShown: false }} />
-        </Stack>
+        <AuthProvider>
+          <Stack
+            screenOptions={{
+              animation: "default", // Predefined animation for smoother navigation
+              headerShown: false, // Keep headers consistent across screens
+              gestureEnabled: true, // Enable swipe gestures for smooth back navigation
+            }}
+          >
+            <Stack.Screen name="index" options={{ headerShown: false }}  />
+
+            {/* Profile */}
+            <Stack.Screen
+              name="profile/Profile"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="profile/EditAccount"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="profile/DeleteAccount"
+              options={{ headerShown: false }}
+            />
+
+            {/* Auth */}
+            <Stack.Screen name="auth/Login" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="auth/Register"
+              options={{ headerShown: false }}
+            />
+          </Stack>
+        </AuthProvider>
       </SafeAreaView>
     </SafeAreaProvider>
   );

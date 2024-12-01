@@ -1,15 +1,16 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Animated, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Link, useRouter } from "expo-router";
-import { checkLoginStatus } from "@/utils/auth";
+import { Link, usePathname, useRouter } from "expo-router";
+import "../global.css";
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
 const Navbar = ({ className }: { className: string }) => {
-  const [isActive, setIsActive] = useState(false);
+  const router = useRouter();
+  const currentRoute = usePathname();
 
   return (
     <View
@@ -20,8 +21,16 @@ const Navbar = ({ className }: { className: string }) => {
         <View className="w-2/12 pb-6 justify-end items-center">
           <Link href="/">
             <View className="items-center">
-              <FontAwesome name="home" size={24} style={styles.icon} />
-              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+              <FontAwesome
+                name="home"
+                size={24}
+                style={currentRoute === "/" ? styles.active : styles.icon}
+              />
+              <Text
+                className={`${
+                  currentRoute === "/" ? "text-vividGreen" : "text-[#7D7D7D]"
+                } font-poppins text-sm text-center`}
+              >
                 Home
               </Text>
             </View>
@@ -32,8 +41,16 @@ const Navbar = ({ className }: { className: string }) => {
         <View className="w-2/12 pb-6 justify-end items-center">
           <Link href="/">
             <View className="items-center">
-              <FontAwesome name="history" size={24} style={styles.icon} />
-              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+              <FontAwesome
+                name="history"
+                size={24}
+                style={currentRoute === "" ? styles.active : styles.icon}
+              />
+              <Text
+                className={`${
+                  currentRoute === "" ? "text-vividGreen" : "text-[#7D7D7D]"
+                } font-poppins text-sm text-center`}
+              >
                 History
               </Text>
             </View>
@@ -41,20 +58,26 @@ const Navbar = ({ className }: { className: string }) => {
         </View>
 
         {/* Transaction */}
-        <View className="w-3/12 h-full relative items-center">
+        <View className="w-3/12 h-full">
           <Link href="/">
-            <View className="absolute -top-6 justify-center items-center gap-1">
-              <View className="w-16 aspect-square rounded-full overflow-hidden">
-                <AnimatedLinearGradient
-                  colors={["#00B553", "#077c3f"]}
-                  className="w-16 aspect-square justify-center items-center"
+            <View className="h-full relative items-center w-full">
+              <View className="absolute -top-6 justify-center items-center gap-2">
+                <View className="w-16 aspect-square rounded-full overflow-hidden">
+                  <AnimatedLinearGradient
+                    colors={["#00B553", "#077c3f"]}
+                    className="w-16 aspect-square justify-center items-center"
+                  >
+                    <FontAwesome5 name="plus" size={30} color="white" />
+                  </AnimatedLinearGradient>
+                </View>
+                <Text
+                  className={`${
+                    currentRoute === "" ? "text-vividGreen" : "text-[#7D7D7D]"
+                  } font-poppins text-sm text-center`}
                 >
-                  <FontAwesome5 name="plus" size={30} color="white" />
-                </AnimatedLinearGradient>
+                  Transaction
+                </Text>
               </View>
-              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
-                Transaction
-              </Text>
             </View>
           </Link>
         </View>
@@ -63,8 +86,16 @@ const Navbar = ({ className }: { className: string }) => {
         <View className="w-2/12 pb-6 justify-end items-center">
           <Link href="/">
             <View className="items-center">
-              <FontAwesome5 name="piggy-bank" size={22} style={styles.icon} />
-              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+              <FontAwesome5
+                name="piggy-bank"
+                size={22}
+                style={currentRoute === "" ? styles.active : styles.icon}
+              />
+              <Text
+                className={`${
+                  currentRoute === "" ? "text-vividGreen" : "text-[#7D7D7D]"
+                } font-poppins text-sm text-center`}
+              >
                 Budget
               </Text>
             </View>
@@ -73,11 +104,20 @@ const Navbar = ({ className }: { className: string }) => {
 
         {/* Account */}
         <View className="w-2/12 pb-6 justify-end items-center">
-          {/* <Link href="/auth/Login"> */}
-          <Link href="../Profile">
+          <Link href="/profile/Profile">
             <View className="items-center">
-              <FontAwesome name="user" size={24} style={styles.icon} />
-              <Text className="text-[#7D7D7D] font-poppins text-sm text-center">
+              <FontAwesome
+                name="user"
+                size={24}
+                style={currentRoute === "/profile/Profile" ? styles.active : styles.icon}
+              />
+              <Text
+                className={`${
+                  currentRoute === "/profile/Profile"
+                    ? "text-vividGreen"
+                    : "text-[#7D7D7D]"
+                } font-poppins text-sm text-center`}
+              >
                 Account
               </Text>
             </View>
@@ -93,5 +133,8 @@ export default Navbar;
 const styles = StyleSheet.create({
   icon: {
     color: "#7D7D7D",
+  },
+  active: {
+    color: "#00B553",
   },
 });
