@@ -1,4 +1,4 @@
-import { TransactionInterface } from "@/data/types";
+import { UserTransactionProps } from "@/data/types";
 import { Image, Text, View } from "react-native";
 
 const RecentTransactions = ({
@@ -6,11 +6,11 @@ const RecentTransactions = ({
   index,
   length,
 }: {
-  transactions: TransactionInterface;
+  transactions: UserTransactionProps;
   index: number;
   length: number;
 }) => {
-  const formattedDate = transactions.date
+  const formattedDate = transactions.transaction_date
     .split("T")[0]
     .split("-")
     .reverse()

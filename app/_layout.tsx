@@ -4,7 +4,6 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
 import * as Font from "expo-font";
 import "../global.css";
-import { checkLoginStatus } from "@/utils/auth";
 import { AuthProvider } from "@/context/AuthContext";
 
 import { createStackNavigator } from "@react-navigation/stack";
@@ -15,6 +14,10 @@ import DeleteAccount from "./profile/DeleteAccount";
 import ChangeAccountData from "./profile/ChangeAccountData";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import ForgotPassword from "./auth/ForgotPassword";
+import ChangePassword from "./profile/ChangePassword";
+import Transaction from "./transactions/Transaction";
+import Budget from "./budget/Budget";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -30,14 +33,6 @@ export default function RootLayout() {
       setFontsLoaded(true);
     };
 
-    const checkLogin = async () => {
-      const loggedIn = await checkLoginStatus();
-      if (!loggedIn) {
-        router.push("/auth/Login");
-      }
-    };
-
-    checkLogin();
     loadFonts();
   }, [router]);
 
@@ -49,6 +44,7 @@ export default function RootLayout() {
     <SafeAreaProvider className="flex-1 bg-black">
       <SafeAreaView className="flex-1 bg-black">
         <StatusBar barStyle="light-content" backgroundColor="#000000" />
+
         <AuthProvider>
           <Stack.Navigator
             screenOptions={{
@@ -84,6 +80,25 @@ export default function RootLayout() {
               component={ChangeAccountData}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="profile/ChangePassword"
+              component={ChangePassword}
+              options={{ headerShown: false }}
+            />
+
+            {/* Transactions */}
+            <Stack.Screen
+              name="transactions/Transaction"
+              component={Transaction}
+              options={{ headerShown: false }}
+            />
+
+            {/* Budget */}
+            <Stack.Screen
+              name="budget/Budget"
+              component={Budget}
+              options={{ headerShown: false }}
+            />
 
             {/* Auth */}
             <Stack.Screen
@@ -94,6 +109,11 @@ export default function RootLayout() {
             <Stack.Screen
               name="auth/Register"
               component={Register}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="auth/ForgotPassword"
+              component={ForgotPassword}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

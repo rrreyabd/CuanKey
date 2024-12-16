@@ -2,6 +2,7 @@ import { ENDPOINTS } from "@/constants/api";
 import { useAuth } from "@/context/AuthContext";
 import { UserData } from "@/data/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 
 export const checkLoginStatus = async () => {
   const token = await AsyncStorage.getItem("token");
@@ -9,22 +10,22 @@ export const checkLoginStatus = async () => {
 };
 
 export const checkAuthStatus = async () => {
-  const response = await fetch(ENDPOINTS.USER, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${await getToken()}`,
-    },
-  });
+    const response = await fetch(ENDPOINTS.USER, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
 
-  const json = await response.json();
+    const json = await response.json();
 
-  if (json.message === "Unauthenticated." || json.message === "Unauthorized." || json.message === "Unauthorized") {
-    await removeToken();
-  }
+    if (json.message === "Unauthenticated." || json.message === "Unauthorized." || json.message === "Unauthorized") {
+      await removeToken();
+    }
 }
 
-export const saveUserData = async ( data: UserData) => {
+export const saveUserData = async (data: UserData) => {
   await AsyncStorage.setItem("user", JSON.stringify(data));
 }
 

@@ -2,12 +2,9 @@ import HeaderBalance from "@/components/HeaderBalance";
 import Navbar from "@/components/Navbar";
 import RecentTransactions from "@/components/RecentTransactions";
 import { ENDPOINTS } from "@/constants/api";
-import { AuthProvider, useAuth } from "@/context/AuthContext";
-import { transactions } from "@/data/placeholder";
-import { UserData } from "@/data/types";
-import { UserWallet } from "@/data/types"; // Add this import
+import { useAuth } from "@/context/AuthContext";
+import { UserTransactionProps, UserWallet } from "@/data/types";
 import { checkAuthStatus, checkLoginStatus, getToken, removeToken } from "@/utils/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
@@ -16,6 +13,7 @@ export default function Index() {
   const [report, setReport] = useState(true);
   const [userTotalBalance, setUserTotalBalance] = useState<number>(0);
   const [userWallets, setUserWallets] = useState<UserWallet[]>([]);
+  const [transactions, setTransactions] = useState<UserTransactionProps[]>([]);
 
   const { user } = useAuth();
 
@@ -64,6 +62,33 @@ export default function Index() {
     }
   };
 
+  const getUserTransactions = async () => {
+    try {
+      const response = await fetch(ENDPOINTS.TRANSACTION.BASE, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+  
+      const json = await response.json();
+      console.log(json.data);
+  
+      // Assuming json.data is an array of transactions
+      const transactions: UserTransactionProps[] = json.data;
+  
+      setTransactions(transactions);
+    } catch (error) {
+      console.error("Failed to fetch user transactions:", error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     const initializeData = async () => {
       const token = await getToken();
@@ -73,13 +98,14 @@ export default function Index() {
       try {
         const loggedIn = await checkLoginStatus();
         if (!loggedIn) {
-          router.push("/auth/Login");
+          router.replace("/auth/Login");
           return;
         }
 
         await Promise.all([
           getUserWallets(),
           getUserTotalBalance(),
+          getUserTransactions(),
           checkAuthStatus()
         ]);
       } catch (error) {
@@ -195,7 +221,7 @@ export default function Index() {
 
           <View className="pt-8">
             <Text className="text-white font-poppins text-lg">
-              Recent Transactions (The current data shown is placeholder data.)
+              Recent Transactions {transactions.length}
             </Text>
 
             <View className="bg-deepCharcoal rounded-xl px-4 mt-2 mb-32">

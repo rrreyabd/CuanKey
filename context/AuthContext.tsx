@@ -3,7 +3,7 @@ import { getToken, saveToken, removeToken } from "@/utils/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContextProps, UserData } from "@/data/types";
 import { ENDPOINTS } from "@/constants/api";
-import { router, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<UserData | null>(null);
 
-  // Muat status autentikasi & data user saat aplikasi pertama kali dibuka
   useEffect(() => {
     const checkAuthStatus = async () => {
       const token = await getToken();
@@ -87,7 +86,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       await logout();
       alert("Account deleted successfully.");
-      router.push("/auth/Login")
+      router.replace("/auth/Login")
     } catch (error) {
       console.error("Failed to delete account:", error);
       throw error;

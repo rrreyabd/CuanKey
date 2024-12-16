@@ -19,7 +19,7 @@ const PrimaryButton: FC<ButtonProps> = ({
       >
         <TouchableOpacity onPress={onPress}>
           <Text
-            className={`text-white text-lg font-poppinsBold text-center ${textClassName}`}
+            className={`text-white text-lg font-poppinsSemibold  text-center ${textClassName}`}
           >
             {title}
           </Text>

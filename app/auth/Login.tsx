@@ -29,10 +29,10 @@ const Login = () => {
 
       if (response.ok) {
         const { data } = await response.json();
-        
+
         if (data.token) {
           await login(data.token, data);
-          router.push("/");
+          router.replace("/");
         } else {
           Alert.alert("Error", "Token not found");
         }
@@ -50,8 +50,24 @@ const Login = () => {
       <ScrollView>
         <HeaderAuth title="Login" desc="Enter your credentials here" />
         <View className="gap-6 mt-8 h-[400px]">
-          <AuthTextInput icon="envelope" placeholder="Email Address" value={email} onChangeText={setEmail} />
-          <AuthTextInput icon="lock" placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
+          <AuthTextInput
+            icon="envelope"
+            placeholder="Email Address"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <AuthTextInput
+            icon="lock"
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <View className="flex flex-col justify-end">
+            <View className="self-end">
+              <Link href="/auth/ForgotPassword" className="text-white font-poppins underline">Forgot Password?</Link>
+            </View>
+          </View>
         </View>
 
         {/* Submit Button */}

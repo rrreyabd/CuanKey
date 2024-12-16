@@ -8,7 +8,7 @@ const DeleteAccount = () => {
   const { handleDeleteAccount } = useAuth();
   return (
     <View className="bg-black flex-1">
-      <View className=" py-6 px-4 relative">
+      <View className=" py-6 px-4">
         <BackHeader pageTitle="Delete Account" />
 
         <View className="items-center py-8">

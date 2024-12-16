@@ -10,10 +10,20 @@ export interface TransactionInterface {
 
 export interface AuthTextInputProps {
     placeholder: string;
-    icon: keyof typeof FontAwesome.glyphMap;
+    label?: string;
+    icon?: keyof typeof FontAwesome.glyphMap;
     value: string;
     onChangeText: (text: string) => void;
     secureTextEntry?: boolean;
+}
+
+export interface TextInputProps {
+    placeholder: string;
+    label: string;
+    value: string;
+    onChangeText: (text: string) => void;
+    secureTextEntry?: boolean;
+    className?: string;
 }
 
 export interface UserData {
@@ -23,6 +33,7 @@ export interface UserData {
     phone_number: string;
     password?: string;
     token?: string;
+    profile_picture?: string;
 }
 
 export interface UserWallet {
@@ -54,4 +65,19 @@ export interface ButtonProps {
     onPress: () => void;
     className?: string;
     textClassName?: string;
+}
+
+export interface DropdownProps {
+    onValueChange: (value: string | null) => void;
+    transactionType?: string;
+}
+
+export interface UserTransactionProps {
+    id: number;
+    wallet: string;
+    category: string;
+    amount: number;
+    description: string;
+    transaction_date: string;
+    user: UserData;
 }

@@ -16,16 +16,10 @@ const Profile = () => {
     <View className="flex-1 bg-black">
       <ScrollView className="py-6 px-4">
         <View className="justify-center items-center flex-1">
-          <View className="flex-row justify-between w-full items-center">
-            <Pressable onPress={() => router.back()}>
-              <FontAwesome5 name="chevron-left" size={24} color="#525B69" />
-            </Pressable>
-
+          <View className="flex-row justify-center w-full items-center">
             <Text className="text-white font-poppinsSemibold text-lg">
               Profile
             </Text>
-
-            <View className="w-6"></View>
           </View>
           <View className="py-8 gap-8 items-center w-full">
             <View className="bg-white rounded-full aspect-square overflow-hidden">
