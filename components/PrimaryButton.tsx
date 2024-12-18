@@ -15,7 +15,7 @@ const PrimaryButton: FC<ButtonProps> = ({
         colors={["#00B553", "#004F24"]}
         start={[0, 0]}
         end={[1, 0]}
-        className="h-14 justify-center rounded-xl overflow-hidden"
+        className={`${className} h-14 justify-center rounded-xl overflow-hidden`}
       >
         <TouchableOpacity onPress={onPress}>
           <Text

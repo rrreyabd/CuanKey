@@ -72,12 +72,31 @@ export interface DropdownProps {
     transactionType?: string;
 }
 
+export interface Category {
+    name: string;
+    description: string;
+    budget: number;
+    type: string;
+}
+
 export interface UserTransactionProps {
     id: number;
-    wallet: string;
-    category: string;
+    wallet: {
+        name: string;
+        initial_balance: number;
+        total_income: number;
+        total_expense: number;
+        total_balance: number;
+        is_active: number;
+    };
+    category: Category;
     amount: number;
     description: string;
     transaction_date: string;
-    user: UserData;
+    user: UserData
 }
+
+export interface WalletItem {
+    label: string;
+    value: string;
+};

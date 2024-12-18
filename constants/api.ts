@@ -18,5 +18,6 @@ export const ENDPOINTS = {
   },
   TRANSACTION: {
     BASE: `${API_BASE_URL}/transaction`,
+    MONTHLY: `${API_BASE_URL}/transaction/monthly`,
   },
 };

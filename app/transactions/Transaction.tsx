@@ -55,11 +55,12 @@ const Transaction = () => {
 
   useEffect(() => {
     console.log(
-      "amount: ", rawAmount + 
-      "\ndate: ", formatDate(date) + 
-      "\nnotes: ", notes +
-      "\nwallet: ", wallet +
-      "\ncategory: ", category
+      "amount: ",
+      rawAmount + "\ndate: ",
+      formatDate(date) + "\nnotes: ",
+      notes + "\nwallet: ",
+      wallet + "\ncategory: ",
+      category
     );
   }, [rawAmount, date, notes, wallet, category, transactionType]);
 
@@ -101,9 +102,9 @@ const Transaction = () => {
   };
 
   const formatDate = (date: Date) => {
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   };
-  
+
   const handleSubmitTransaction = async () => {
     setIsSubmitting(true);
     try {
@@ -245,12 +246,12 @@ const Transaction = () => {
               </Text>
               <WalletDropdown onValueChange={handleWalletChange} />
             </View>
-
-            <PrimaryButton
-              title={isSubmitting ? "Processing..." : "Add Transaction"}
-              onPress={() => handleSubmitTransaction()}
-            />
           </View>
+          <PrimaryButton
+            title={isSubmitting ? "Processing..." : "Add Transaction"}
+            onPress={() => handleSubmitTransaction()}
+            className="mt-8"
+          />
         </View>
       </TouchableWithoutFeedback>
     </View>

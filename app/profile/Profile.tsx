@@ -17,7 +17,7 @@ const Profile = () => {
       <ScrollView className="py-6 px-4">
         <View className="justify-center items-center flex-1">
           <View className="flex-row justify-center w-full items-center">
-            <Text className="text-white font-poppinsSemibold text-lg">
+            <Text className="text-white font-poppinsBold text-xl">
               Profile
             </Text>
           </View>

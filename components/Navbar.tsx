@@ -47,16 +47,16 @@ const Navbar = ({ className }: { className?: string }) => {
 
           {/* History */}
           <View className="w-2/12 pb-6 justify-end items-center">
-            <Pressable onPress={() => router.replace("/")}>
+            <Pressable onPress={() => router.replace("/history/History")}>
               <View className="items-center">
                 <FontAwesome
                   name="history"
                   size={24}
-                  style={currentRoute === "" ? styles.active : styles.icon}
+                  style={currentRoute === "/history/History" ? styles.active : styles.icon}
                 />
                 <Text
                   className={`${
-                    currentRoute === "" ? "text-vividGreen" : "text-[#7D7D7D]"
+                    currentRoute === "/history/History" ? "text-vividGreen" : "text-[#7D7D7D]"
                   } font-poppins text-sm text-center`}
                 >
                   History
@@ -99,11 +99,11 @@ const Navbar = ({ className }: { className?: string }) => {
                 <FontAwesome5
                   name="piggy-bank"
                   size={22}
-                  style={currentRoute === "" ? styles.active : styles.icon}
+                  style={currentRoute === "/budget/Budget" ? styles.active : styles.icon}
                 />
                 <Text
                   className={`${
-                    currentRoute === "" ? "text-vividGreen" : "text-[#7D7D7D]"
+                    currentRoute === "/budget/Budget" ? "text-vividGreen" : "text-[#7D7D7D]"
                   } font-poppins text-sm text-center`}
                 >
                   Budget

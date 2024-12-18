@@ -18,6 +18,8 @@ import ForgotPassword from "./auth/ForgotPassword";
 import ChangePassword from "./profile/ChangePassword";
 import Transaction from "./transactions/Transaction";
 import Budget from "./budget/Budget";
+import History from "./history/History";
+import TransactionDetail from "./transactions/[id]";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -92,11 +94,23 @@ export default function RootLayout() {
               component={Transaction}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="transactions/[id]"
+              component={TransactionDetail}
+              options={{ headerShown: false }}
+            />
 
             {/* Budget */}
             <Stack.Screen
               name="budget/Budget"
               component={Budget}
+              options={{ headerShown: false }}
+            />
+
+            {/* History */}
+            <Stack.Screen
+              name="history/History"
+              component={History}
               options={{ headerShown: false }}
             />
 

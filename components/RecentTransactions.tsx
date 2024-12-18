@@ -25,18 +25,11 @@ const RecentTransactions = ({
     >
       <View>
         <View className="flex-row gap-4 items-center">
-          <Image
-            source={
-              transactions.category === "Investment"
-                ? require("@/assets/images/icons/investment.png")
-                : require("@/assets/images/icons/fnb.png")
-            }
-            className="w-12 aspect-square"
-          />
+          <Text className="text-3xl">🍕</Text>
 
           <View className="justify-center">
             <Text className="text-white font-poppins">
-              {transactions.category}
+              {transactions.description}
             </Text>
             <Text className="text-lightGray font-poppins text-sm">
               {formattedDate}
@@ -48,12 +41,12 @@ const RecentTransactions = ({
       <View className="justify-center">
         <Text
           className={`${
-            transactions.type === "Income"
+            transactions.category.type === "Pemasukan"
               ? "text-vividGreen"
               : "text-customRed"
           }  font-poppins`}
         >
-          {transactions.type === "Income" ? "+" : "-"} Rp{" "}
+          {transactions.category.type === "Pemasukan" ? "+" : "-"} Rp{" "}
           {transactions.amount.toLocaleString()}
         </Text>
       </View>
