@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login, setUserData } = useAuth();
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleLogin = async () => {

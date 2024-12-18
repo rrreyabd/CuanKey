@@ -18,6 +18,7 @@ import ProfilePictureComponent from "@/components/ProfilePictureComponent";
 import PrimaryButton from "@/components/PrimaryButton";
 import { getToken } from "@/utils/auth";
 import { ENDPOINTS } from "@/constants/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EditAccount = () => {
   const { user, handleLogout, setUserData } = useAuth();
@@ -53,6 +54,7 @@ const EditAccount = () => {
 
       const data = await response.json();
       console.log(data)
+      await AsyncStorage.setItem("userData", JSON.stringify(data.data))
       setUserData(data.data);
       Alert.alert("Success", "Profile picture updated successfully");
       router.back();

@@ -15,7 +15,7 @@ const ProfilePictureComponent = ({
   }, [])
 
   const ProfilePictureDynamicComponent = () => {
-    switch (user?.profile_picture?.toString() ?? "") {
+    switch (user?.profile_picture?.toString()) {
       case "1":
         return (
           <Image
@@ -69,13 +69,6 @@ const ProfilePictureComponent = ({
         return (
           <Image
             source={require("@/assets/profile/character_8.png")}
-            style={{ width: 120, height: 120 }}
-          />
-        );
-      default:
-        return (
-          <Image
-            source={require("@/assets/profile/character_1.png")}
             style={{ width: 120, height: 120 }}
           />
         );
