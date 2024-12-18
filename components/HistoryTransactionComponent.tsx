@@ -54,7 +54,7 @@ const HistoryTransactionComponent = ({
         <View>
           <View className="flex-row gap-4 items-center">
             <View>
-              <Text className="text-white text-center text-lg h-5 font-poppinsBold">
+              <Text className="text-white text-center text-xl h-5 font-poppinsBold">
                 {finalDate.date}
               </Text>
               <Text className="text-white text-center h-4 text-sm font-poppins">
@@ -65,7 +65,9 @@ const HistoryTransactionComponent = ({
               </Text>
             </View>
 
-            <Text className="text-3xl">🍕</Text>
+            <Text className="text-3xl">
+              {transactions.category.icon}
+            </Text>
 
             <View className="justify-center">
               <Text className="text-white font-poppinsSemibold h-6 capitalize">

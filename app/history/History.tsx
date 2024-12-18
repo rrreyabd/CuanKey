@@ -212,8 +212,6 @@ const History = () => {
         )}
       </ScrollView>
       <Navbar />
-
-      <StatusBar backgroundColor="black" />
     </View>
   );
 };

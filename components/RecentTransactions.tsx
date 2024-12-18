@@ -25,7 +25,9 @@ const RecentTransactions = ({
     >
       <View>
         <View className="flex-row gap-4 items-center">
-          <Text className="text-3xl">🍕</Text>
+          <Text className="text-3xl">
+            {transactions.category.icon}
+          </Text>
 
           <View className="justify-center">
             <Text className="text-white font-poppins">

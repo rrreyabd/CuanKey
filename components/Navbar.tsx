@@ -27,7 +27,7 @@ const Navbar = ({ className }: { className?: string }) => {
         <View className="h-full flex-row justify-between">
           {/* Home */}
           <View className="w-2/12 pb-6 justify-end items-center">
-            <Pressable onPress={() => router.replace("/")}>
+            <Pressable onPress={() => router.replace("/")} disabled={currentRoute === "/"} >
               <View className="items-center">
                 <FontAwesome
                   name="home"
@@ -47,7 +47,7 @@ const Navbar = ({ className }: { className?: string }) => {
 
           {/* History */}
           <View className="w-2/12 pb-6 justify-end items-center">
-            <Pressable onPress={() => router.replace("/history/History")}>
+            <Pressable onPress={() => router.replace("/history/History")} disabled={currentRoute === "/history/History"}>
               <View className="items-center">
                 <FontAwesome
                   name="history"
@@ -94,7 +94,7 @@ const Navbar = ({ className }: { className?: string }) => {
 
           {/* Budget */}
           <View className="w-2/12 pb-6 justify-end items-center">
-            <Pressable onPress={() => router.replace("/budget/Budget")}>
+            <Pressable onPress={() => router.replace("/budget/Budget")} disabled={currentRoute === "/budget/Budget"}>
               <View className="items-center">
                 <FontAwesome5
                   name="piggy-bank"
@@ -114,7 +114,7 @@ const Navbar = ({ className }: { className?: string }) => {
 
           {/* Account */}
           <View className="w-2/12 pb-6 justify-end items-center">
-            <Pressable onPress={() => router.replace("/profile/Profile")}>
+            <Pressable onPress={() => router.replace("/profile/Profile")} disabled={currentRoute === "/profile/Profile"}>
               <View className="items-center">
                 <FontAwesome
                   name="user"

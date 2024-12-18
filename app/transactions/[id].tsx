@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  ScrollView,
   ActivityIndicator,
-  StatusBar,
   TouchableOpacity,
   Image,
+  Alert,
 } from "react-native";
 import { router, useGlobalSearchParams } from "expo-router";
 import { ENDPOINTS } from "@/constants/api";
@@ -36,6 +35,30 @@ const TransactionDetail = () => {
 
       const json = await response.json();
       setTransaction(json.data);
+      console.log(transaction);
+    } catch (error) {
+      console.error("Failed to fetch transaction details:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteTransaction = async () => {
+    try {
+      const response = await fetch(`${ENDPOINTS.TRANSACTION.BASE}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      } else {
+        Alert.alert("Transaction deleted successfully");
+        router.replace("/history/History");
+      }
     } catch (error) {
       console.error("Failed to fetch transaction details:", error);
     } finally {
@@ -48,6 +71,10 @@ const TransactionDetail = () => {
       fetchTransactionDetails();
     }
   }, [id]);
+
+  const formatCurrency = (num: number) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   if (loading) {
     return (
@@ -78,11 +105,7 @@ const TransactionDetail = () => {
         </TouchableOpacity>
 
         <View className="flex-row gap-6">
-          <Image
-            source={require("@/assets/icons/edit-fill.png")}
-            style={{ width: 24, height: 24 }}
-          />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleDeleteTransaction}>
             <Image
               source={require("@/assets/icons/delete-white.png")}
               style={{ width: 24, height: 24 }}
@@ -91,46 +114,46 @@ const TransactionDetail = () => {
         </View>
       </View>
 
-      <View className="gap-4">
-        <View>
-          <Text className="text-subText font-poppinsSemibold">Category</Text>
+      <View className="items-center pt-16 pb-8 gap-2">
+        <Text className="text-7xl pt-4 text-white">
+          {transaction.category.icon}
+        </Text>
+        <Text className="text-white text-xl text-center font-poppinsSemibold">
+          {transaction.category.name}
+        </Text>
+        <Text
+          className={`text-2xl text-center font-poppinsSemibold ${
+            transaction.category.type === "Pemasukan"
+              ? "text-vividGreen"
+              : "text-customRed"
+          }`}
+        >
+          {transaction.category.type === "Pemasukan" ? "+" : "-"} Rp{" "}
+          {formatCurrency(transaction.amount)}
+        </Text>
+      </View>
+
+      <View className="bg-deepCharcoal p-4 rounded-md">
+        <View className="justify-between flex-row border-b border-subText py-4">
+          <Text className="text-white font-poppins">Date</Text>
           <Text className="text-white font-poppins">
-            {transaction.category.name}
+            {transaction.transaction_date
+              .split("T")[0]
+              .split("-")
+              .reverse()
+              .join("/")}
           </Text>
         </View>
-
-        <View>
-          <Text className="text-subText font-poppinsSemibold">Amount</Text>
-          <Text
-            className={`font-poppins text-lg ${
-              transaction.category.type === "Pemasukan"
-                ? "text-vividGreen"
-                : "text-customRed"
-            }`}
-          >
-            {transaction.category.type === "Pemasukan" ? "+" : "-"} Rp{" "}
-            {transaction.amount.toLocaleString()}
-          </Text>
-        </View>
-
-        <View>
-          <Text className="text-subText font-poppinsSemibold">Date</Text>
-          <Text className="text-white font-poppins">
-            {transaction.transaction_date}
-          </Text>
-        </View>
-
-        <View>
-          <Text className="text-subText font-poppinsSemibold">Wallet</Text>
+        <View className="justify-between flex-row border-b border-subText py-4">
+          <Text className="text-white font-poppins">Wallet</Text>
           <Text className="text-white font-poppins">
             {transaction.wallet.name}
           </Text>
         </View>
-
-        <View>
-          <Text className="text-subText font-poppinsSemibold">Description</Text>
+        <View className="justify-between flex-row border-b border-subText py-4">
+          <Text className="text-white font-poppins">Note</Text>
           <Text className="text-white font-poppins">
-            {transaction.description || "No description provided"}
+            {transaction.description}
           </Text>
         </View>
       </View>

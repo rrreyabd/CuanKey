@@ -74,6 +74,7 @@ export interface DropdownProps {
 
 export interface Category {
     name: string;
+    icon: string;
     description: string;
     budget: number;
     type: string;
