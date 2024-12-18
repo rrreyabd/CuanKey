@@ -11,7 +11,6 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { usePathname, useRouter } from "expo-router";
 import "../global.css";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 

@@ -133,7 +133,7 @@ const TransactionDetail = () => {
         </Text>
       </View>
 
-      <View className="bg-deepCharcoal p-4 rounded-md">
+      <View className="bg-deepCharcoal px-4 rounded-md">
         <View className="justify-between flex-row border-b border-subText py-4">
           <Text className="text-white font-poppins">Date</Text>
           <Text className="text-white font-poppins">
@@ -150,7 +150,7 @@ const TransactionDetail = () => {
             {transaction.wallet.name}
           </Text>
         </View>
-        <View className="justify-between flex-row border-b border-subText py-4">
+        <View className="justify-between flex-row py-4">
           <Text className="text-white font-poppins">Note</Text>
           <Text className="text-white font-poppins">
             {transaction.description}

@@ -101,3 +101,8 @@ export interface WalletItem {
     label: string;
     value: string;
 };
+
+export interface ProfilePicture {
+    id: string;
+    uri: string;
+}

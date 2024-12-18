@@ -7,6 +7,7 @@ import { ENDPOINTS } from "@/constants/api";
 import { useAuth } from "@/context/AuthContext";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Navbar from "@/components/Navbar";
+import ProfilePictureComponent from "@/components/ProfilePictureComponent";
 
 const Profile = () => {
   const router = useRouter();
@@ -22,12 +23,7 @@ const Profile = () => {
             </Text>
           </View>
           <View className="py-8 gap-8 items-center w-full">
-            <View className="bg-white rounded-full aspect-square overflow-hidden">
-              <Image
-                source={require("@/assets/profile/character_1.png")}
-                style={{ width: 120, height: 120 }}
-              />
-            </View>
+            <ProfilePictureComponent />
             <View className="items-center">
               <Text className="text-white font-poppinsSemibold text-lg">
                 {user?.fullname ?? "Name not available"}

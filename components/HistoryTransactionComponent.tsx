@@ -43,7 +43,6 @@ const HistoryTransactionComponent = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log("Navigating to transaction detail id: ", transactions.id);
         router.push(`/transactions/${transactions.id}`);
       }}
     >
@@ -65,9 +64,7 @@ const HistoryTransactionComponent = ({
               </Text>
             </View>
 
-            <Text className="text-3xl">
-              {transactions.category.icon}
-            </Text>
+            <Text className="text-3xl">{transactions.category.icon}</Text>
 
             <View className="justify-center">
               <Text className="text-white font-poppinsSemibold h-6 capitalize">

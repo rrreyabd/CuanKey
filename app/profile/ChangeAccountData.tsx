@@ -25,7 +25,7 @@ const ChangeAccountData = () => {
           Authorization: `Bearer ${await getToken()}`,
         },
         body: JSON.stringify({
-          profile_picture: "1",
+          profile_picture: user?.profile_picture,
           fullname: fullName,
           phone_number: phone,
         }),
