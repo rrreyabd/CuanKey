@@ -35,7 +35,7 @@ const RecentTransactions = ({
 
             <View className="justify-center">
               <Text className="text-white font-poppins">
-                {transactions.description}
+                {transactions.category.name}
               </Text>
               <Text className="text-lightGray font-poppins text-sm">
                 {formattedDate}

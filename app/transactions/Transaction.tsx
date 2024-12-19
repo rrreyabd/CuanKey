@@ -230,7 +230,7 @@ const Transaction = () => {
                 NOTES
               </Text>
               <TextInput
-                placeholder="Add Notes (if needed)"
+                placeholder="Add Notes"
                 placeholderTextColor="#525B69"
                 value={notes}
                 onChangeText={setNotes}

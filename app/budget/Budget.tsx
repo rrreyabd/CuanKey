@@ -6,7 +6,7 @@ import { Category } from "@/data/types";
 import { checkLoginStatus, getToken } from "@/utils/auth";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 const Budget = () => {
   // Wallet Dropdown
@@ -17,7 +17,9 @@ const Budget = () => {
 
   // Get User Category
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isFetching, setIsFetching] = useState(true);
   const getUserCategory = async () => {
+    setIsFetching(true)
     try {
       const response = await fetch(ENDPOINTS.CATEGORY.BASE, {
         method: "GET",
@@ -34,6 +36,7 @@ const Budget = () => {
       const json = await response.json();
       const categories: Category[] = json.data;
       setCategories(categories);
+      setIsFetching(false)
     } catch (error) {
       console.error("Failed to fetch user categories:", error);
       throw error;
@@ -59,8 +62,16 @@ const Budget = () => {
   }, [activeWallet]);
 
   const formatCurrency = (num: number) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
+
+  if (isFetching) {
+    return (
+      <View className="flex-1 justify-center items-center bg-black">
+        <ActivityIndicator size="large" color="#00B553" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-black">
