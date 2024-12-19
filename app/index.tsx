@@ -12,22 +12,33 @@ import {
 } from "@/utils/auth";
 import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 
 export default function Index() {
   const [report, setReport] = useState(true);
   const [userTotalBalance, setUserTotalBalance] = useState<number>(0);
   const [userWallets, setUserWallets] = useState<UserWallet[]>([]);
   const [transactions, setTransactions] = useState<UserTransactionProps[]>([]);
+  const [barPresed, setBarPressed] = useState<number>();
+  const [isFetching, setIsFetching] = useState(true);
   const [formattedData, setFormattedData] = useState<
     { month: string; total_expense: number; total_income: number }[]
   >([]);
-  const [recapData, setRecapData] = useState<{ income: string, expense: string}>()
-
-  const { user } = useAuth();
+  const [recapData, setRecapData] = useState<{
+    income: string;
+    expense: string;
+  }>();
 
   const formatCurrency = (num: number) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
   const getUserWallets = async () => {
@@ -76,6 +87,7 @@ export default function Index() {
   };
 
   const getUserTransactions = async () => {
+    setIsFetching(true)
     try {
       const response = await fetch(ENDPOINTS.TRANSACTION.BASE, {
         method: "GET",
@@ -90,9 +102,10 @@ export default function Index() {
       }
 
       const json = await response.json();
-      const transactions: UserTransactionProps[] = json.data;
+      const transactions: UserTransactionProps[] = json.data.slice(0, 10);
 
       setTransactions(transactions);
+      setIsFetching(false)
     } catch (error) {
       console.error("Failed to fetch user transactions:", error);
       throw error;
@@ -121,10 +134,12 @@ export default function Index() {
         total_expense: item.total_expense,
         total_income: item.total_income,
       }));
-      
+
       setRecapData({
         income: formatCurrency(json.overall_averages.average_income.toFixed(0)),
-        expense: formatCurrency(json.overall_averages.average_expense.toFixed(0)),
+        expense: formatCurrency(
+          json.overall_averages.average_expense.toFixed(0)
+        ),
       });
 
       // Save formatted data to state
@@ -158,9 +173,37 @@ export default function Index() {
         console.error("Error initializing data:", error);
       }
     };
-
     initializeData();
   }, []);
+
+  const abbreviateMonth = (monthString: string) => {
+    const monthMap = {
+      January: "Jan",
+      February: "Feb",
+      March: "Mar",
+      April: "Apr",
+      May: "May",
+      June: "Jun",
+      July: "Jul",
+      August: "Aug",
+      September: "Sep",
+      October: "Oct",
+      November: "Nov",
+      December: "Dec",
+    };
+
+    // Split the string if it contains a year
+    const [month] = monthString.split(" ");
+    return monthMap[month as keyof typeof monthMap] || month; // Return abbreviation or original month
+  };
+
+  if (isFetching) {
+    return (
+      <View className="flex-1 justify-center items-center bg-black">
+        <ActivityIndicator size="large" color="#00B553" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-black">
@@ -198,7 +241,7 @@ export default function Index() {
                   <Text className="font-poppins text-white">{wallet.name}</Text>
                 </View>
                 <Text className="font-poppins text-white">
-                  Rp {wallet.total_balance}
+                  Rp {formatCurrency(wallet.total_balance)}
                 </Text>
               </View>
             ))
@@ -259,20 +302,74 @@ export default function Index() {
               <Text className="text-white font-poppinsSemibold">
                 Rp {report ? recapData?.income : recapData?.expense}
               </Text>
-              <View>
-                {formattedData.map((data, index) => (
-                  <View key={index} className="p-4 border-b border-white/40">
-                    <Text className="text-white font-poppins">
-                      Month: {data.month}
-                    </Text>
-                    <Text className="text-white font-poppins">
-                      Total Expense: {data.total_expense}
-                    </Text>
-                    <Text className="text-white font-poppins">
-                      Total Income: {data.total_income}
-                    </Text>
-                  </View>
-                ))}
+              <View className="flex-row h-[200px] items-end mt-16">
+                {formattedData.map((data, index) => {
+                  // Determine the highest value
+                  const highestValue = report
+                    ? Math.max(...formattedData.map((d) => d.total_income))
+                    : Math.max(...formattedData.map((d) => d.total_expense));
+
+                  // Calculate percentage
+                  const percentage = report
+                    ? (data.total_income / highestValue) * 100
+                    : (data.total_expense / highestValue) * 100;
+
+                  const handlePressBarChart = () => {
+                    if (barPresed === index) {
+                      setBarPressed(NaN);
+                    } else {
+                      setBarPressed(index);
+                      console.log("barPressed: ", barPresed);
+                      console.log("index: ", index);
+                    }
+                  };
+
+                  return (
+                    // Bar chart
+                    <View
+                      key={index}
+                      className="w-[20%] h-full gap-2 justify-end"
+                    >
+                      {barPresed === index && (
+                        <View
+                          className={`absolute bottom-10 z-20 w-40 p-2 rounded-md bg-black/80 ${
+                            index > 2 ? "right-2" : "left-2"
+                          }`}
+                        >
+                          <Text className="text-white font-poppins">
+                            {data.month}
+                          </Text>
+                          <Text className="text-white font-poppins">
+                            Rp{" "}
+                            {report
+                              ? formatCurrency(data.total_income)
+                              : formatCurrency(data.total_expense)}
+                          </Text>
+                        </View>
+                      )}
+
+                      <TouchableOpacity
+                        onPress={handlePressBarChart}
+                        className="items-center h-full"
+                        style={{ height: `${percentage}%` }}
+                      >
+                        <View
+                          className={`rounded-md h-full w-[80%] ${
+                            // (
+                            //   report
+                            //     ? highestValue === data.total_income
+                            //     : highestValue === data.total_expense
+                            // )
+                            barPresed === index ? "bg-white" : "bg-vividGreen"
+                          }`}
+                        ></View>
+                      </TouchableOpacity>
+                      <Text className="text-white text-center font-poppinsSemibold">
+                        {abbreviateMonth(data.month)}
+                      </Text>
+                    </View>
+                  );
+                })}
               </View>
             </View>
           </View>

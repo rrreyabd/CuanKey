@@ -73,26 +73,13 @@ const TransactionDetail = () => {
   }, [id]);
 
   const formatCurrency = (num: number) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
-  if (loading) {
+  if (loading || !transaction) {
     return (
       <View className="flex-1 justify-center items-center bg-black">
         <ActivityIndicator size="large" color="#00FF00" />
-      </View>
-    );
-  }
-
-  if (!transaction) {
-    return (
-      <View className="flex-1 justify-center items-center bg-black">
-        <DataNotFound
-          title="Transaction not found"
-          subTitle="The transaction you are looking for does not exist."
-          onPress={() => router.replace("/history/History")}
-          buttonTitle="Back to History"
-        />
       </View>
     );
   }

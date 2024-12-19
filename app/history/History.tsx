@@ -1,4 +1,4 @@
-import { Text, Pressable, View, StatusBar } from "react-native";
+import { Text, Pressable, View, StatusBar, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import { ScrollView } from "react-native-gesture-handler";
@@ -15,6 +15,7 @@ const History = () => {
   const [activeWallet, setActiveWallet] = useState("Cash Wallet");
   const [transactions, setTransactions] = useState<UserTransactionProps[]>([]);
   const [user, setUser] = useState<any>(null);
+  const [isFetching, setIsFetching] = useState(true);
 
   // Get the current month
   const currentMonth = new Date().toLocaleString("default", { month: "long" });
@@ -52,6 +53,7 @@ const History = () => {
 
   // Get User Transactions
   const getUserTransactions = async () => {
+    setIsFetching(true)
     try {
       const response = await fetch(ENDPOINTS.TRANSACTION.BASE, {
         method: "GET",
@@ -69,6 +71,7 @@ const History = () => {
 
       const transactions: UserTransactionProps[] = json.data;
 
+      setIsFetching(false)
       setTransactions(transactions);
     } catch (error) {
       console.error("Failed to fetch user transactions:", error);
@@ -101,6 +104,14 @@ const History = () => {
 
     initializeData();
   }, [activeWallet]);
+
+  if (isFetching) {
+    return (
+      <View className="flex-1 justify-center items-center bg-black">
+        <ActivityIndicator size="large" color="#00B553" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-black">
