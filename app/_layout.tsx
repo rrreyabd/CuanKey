@@ -20,6 +20,7 @@ import Transaction from "./transactions/Transaction";
 import Budget from "./budget/Budget";
 import History from "./history/History";
 import TransactionDetail from "./transactions/[id]";
+import Setting from "./setting/Setting";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -111,6 +112,13 @@ export default function RootLayout() {
             <Stack.Screen
               name="history/History"
               component={History}
+              options={{ headerShown: false }}
+            />
+
+            {/* Setting */}
+            <Stack.Screen
+              name="setting/Setting"
+              component={Setting}
               options={{ headerShown: false }}
             />
 
