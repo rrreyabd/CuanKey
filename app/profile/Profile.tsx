@@ -103,7 +103,7 @@ const Profile = () => {
             </Link>
 
             {/* Settings */}
-            <Link href="/">
+            <Link href="/setting/Setting">
               <View className="bg-deepCharcoal flex-row justify-between w-full p-4 rounded-md">
                 <View className="gap-6 flex-row items-center">
                   <Image
