@@ -69,7 +69,7 @@ const Profile = () => {
             </Link>
 
             {/* Transaction Category */}
-            <Link href="/">
+            {/* <Link href="/">
               <View className="bg-deepCharcoal flex-row justify-between w-full p-4 rounded-md">
                 <View className="gap-6 flex-row items-center">
                   <Image
@@ -83,7 +83,7 @@ const Profile = () => {
 
                 <FontAwesome5 name="chevron-right" size={18} color="#525B69" />
               </View>
-            </Link>
+            </Link> */}
 
             {/* Recurring Transactions */}
             <Link href="/">

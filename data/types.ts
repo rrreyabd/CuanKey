@@ -72,14 +72,6 @@ export interface DropdownProps {
     transactionType?: string;
 }
 
-export interface Category {
-    name: string;
-    icon: string;
-    description: string;
-    budget: number;
-    type: string;
-}
-
 export interface UserTransactionProps {
     id: number;
     wallet: {
@@ -106,3 +98,13 @@ export interface ProfilePicture {
     id: string;
     uri: string;
 }
+
+export interface Category {
+    id: string;
+    name: string;
+    icon: string;
+    description: string;
+    budget: number;
+    type: "Pengeluaran" | "Pemasukan";
+    user: UserData;
+  }
