@@ -8,16 +8,17 @@ const PrimaryButton: FC<ButtonProps> = ({
   onPress,
   className,
   textClassName,
+  disabled
 }) => {
   return (
     <>
       <LinearGradient
-        colors={["#00B553", "#004F24"]}
+        colors={disabled ? ["#858e96", "#60696b"] : ["#00B553", "#004F24"]}
         start={[0, 0]}
         end={[1, 0]}
         className={`${className} h-14 justify-center rounded-xl overflow-hidden`}
       >
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} disabled={disabled}>
           <Text
             className={`text-white text-lg font-poppinsSemibold  text-center ${textClassName}`}
           >

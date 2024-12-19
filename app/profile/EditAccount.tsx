@@ -24,8 +24,9 @@ const EditAccount = () => {
   const { user, handleLogout, setUserData } = useAuth();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ["100%"], []);
-  const [selectedProfilePicture, setSelectedProfilePicture] =
-    useState<number>();
+  const [selectedProfilePicture, setSelectedProfilePicture] = useState<
+    number | boolean
+  >(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleOpenBottomSheet = () => {
@@ -53,8 +54,8 @@ const EditAccount = () => {
       }
 
       const data = await response.json();
-      console.log(data)
-      await AsyncStorage.setItem("userData", JSON.stringify(data.data))
+      console.log(data);
+      await AsyncStorage.setItem("userData", JSON.stringify(data.data));
       setUserData(data.data);
       Alert.alert("Success", "Profile picture updated successfully");
       router.back();
@@ -252,6 +253,7 @@ const EditAccount = () => {
 
           <View className="px-8">
             <PrimaryButton
+              disabled={!selectedProfilePicture}
               title={isLoading ? "Processing..." : "Save Changes"}
               onPress={handleUpdateProfilePicture}
             />

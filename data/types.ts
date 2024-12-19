@@ -65,6 +65,7 @@ export interface ButtonProps {
     onPress: () => void;
     className?: string;
     textClassName?: string;
+    disabled?: boolean;
 }
 
 export interface DropdownProps {
