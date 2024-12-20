@@ -71,6 +71,7 @@ export interface ButtonProps {
 export interface DropdownProps {
     onValueChange: (value: string | null) => void;
     transactionType?: string;
+    defaultValue?: string | null;
 }
 
 export interface UserTransactionProps {
@@ -105,6 +106,7 @@ export interface Category {
     name: string;
     icon: string;
     description: string;
+    total_transaction: number;
     budget: number;
     type: "Pengeluaran" | "Pemasukan";
     user: UserData;

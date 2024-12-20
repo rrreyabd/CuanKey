@@ -10,8 +10,6 @@ import {
 import { router, useGlobalSearchParams } from "expo-router";
 import { ENDPOINTS } from "@/constants/api";
 import { getToken } from "@/utils/auth";
-import DataNotFound from "@/components/DataNotFound";
-import BackHeader from "@/components/BackHeader";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const TransactionDetail = () => {

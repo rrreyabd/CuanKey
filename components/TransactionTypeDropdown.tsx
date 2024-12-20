@@ -6,8 +6,9 @@ import { DropdownProps } from "@/data/types";
 
 const TransactionTypeDropdown: React.FC<DropdownProps> = ({
   onValueChange,
+  defaultValue
 }) => {
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState<string | null>(defaultValue ?? null);
 
   const transactionTypes = [
     { label: "Income", value: "Pemasukan" },

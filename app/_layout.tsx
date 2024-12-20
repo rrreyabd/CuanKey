@@ -21,6 +21,9 @@ import Budget from "./budget/Budget";
 import History from "./history/History";
 import TransactionDetail from "./transactions/[id]";
 import Setting from "./setting/Setting";
+import EditBudget from "./budget/[id]";
+import Recurring from "./recurring/Recurring";
+import AddBudget from "./budget/AddBudget";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -105,6 +108,23 @@ export default function RootLayout() {
             <Stack.Screen
               name="budget/Budget"
               component={Budget}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="budget/AddBudget"
+              component={AddBudget}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="budget/[id]"
+              component={EditBudget}
+              options={{ headerShown: false }}
+            />
+
+            {/* Recurring */}
+            <Stack.Screen
+              name="recurring/Recurring"
+              component={Recurring}
               options={{ headerShown: false }}
             />
 
