@@ -87,7 +87,7 @@ export default function Index() {
   };
 
   const getUserTransactions = async () => {
-    setIsFetching(true)
+    setIsFetching(true);
     try {
       const response = await fetch(ENDPOINTS.TRANSACTION.BASE, {
         method: "GET",
@@ -105,7 +105,7 @@ export default function Index() {
       const transactions: UserTransactionProps[] = json.data.slice(0, 10);
 
       setTransactions(transactions);
-      setIsFetching(false)
+      setIsFetching(false);
     } catch (error) {
       console.error("Failed to fetch user transactions:", error);
       throw error;
@@ -207,6 +207,11 @@ export default function Index() {
 
   return (
     <View className="flex-1 bg-black">
+      {isFetching && (
+        <View className="flex-1 justify-center items-center bg-black">
+          <ActivityIndicator size="large" color="#00B553" />
+        </View>
+      )}
       <ScrollView className="flex-1 px-4">
         <HeaderBalance balance={userTotalBalance} />
 
@@ -235,12 +240,31 @@ export default function Index() {
                 className="flex-row justify-between items-center pt-4"
               >
                 <View className="flex-row gap-3 items-center">
-                  <Image
-                    source={require("@/assets/images/icons/cash_wallet.png")}
-                  />
+                  {i % 3 === 0 ? (
+                    <Image
+                      source={require("@/assets/images/icons/cash_wallet_blue.png")}
+                      style={{ width: 40, height: 40 }}
+                    />
+                  ) : i % 3 === 1 ? (
+                    <Image
+                      source={require("@/assets/images/icons/cash_wallet_red.png")}
+                      style={{ width: 40, height: 40 }}
+                    />
+                  ) : (
+                    <Image
+                      source={require("@/assets/images/icons/cash_wallet_yellow.png")}
+                      style={{ width: 40, height: 40 }}
+                    />
+                  )}
                   <Text className="font-poppins text-white">{wallet.name}</Text>
                 </View>
-                <Text className="font-poppins text-white">
+                <Text
+                  className={`font-poppins ${
+                    wallet.total_balance > 0
+                      ? "text-vividGreen"
+                      : "text-customRed"
+                  } `}
+                >
                   Rp {formatCurrency(wallet.total_balance)}
                 </Text>
               </View>

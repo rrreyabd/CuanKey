@@ -70,7 +70,7 @@ const Navbar = ({ className }: { className?: string }) => {
               onPress={() => router.push("/transactions/Transaction")}
             >
               <View className="h-full relative items-center w-full">
-                <View className="absolute -top-6 justify-center items-center gap-2">
+                <View className="absolute -top-5 justify-center items-center gap-2">
                   <View className="w-16 aspect-square rounded-full overflow-hidden">
                     <AnimatedLinearGradient
                       colors={["#00B553", "#077c3f"]}
@@ -91,7 +91,7 @@ const Navbar = ({ className }: { className?: string }) => {
             </TouchableOpacity>
           </View>
 
-          {/* Budget */}
+          {/* Category */}
           <View className="w-2/12 pb-6 justify-end items-center">
             <Pressable onPress={() => router.replace("/budget/Budget")} disabled={currentRoute === "/budget/Budget"}>
               <View className="items-center">
@@ -105,7 +105,7 @@ const Navbar = ({ className }: { className?: string }) => {
                     currentRoute === "/budget/Budget" ? "text-vividGreen" : "text-[#7D7D7D]"
                   } font-poppins text-sm text-center`}
                 >
-                  Budget
+                  Category
                 </Text>
               </View>
             </Pressable>
