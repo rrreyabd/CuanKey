@@ -12,51 +12,59 @@ import {
 } from "react-native";
 import { ENDPOINTS } from "@/constants/api";
 
+// Komponen Register untuk mendaftarkan pengguna baru
 const Register = () => {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
+  // State untuk menyimpan data input pengguna
+  const [fullName, setFullName] = useState(""); // Nama lengkap pengguna
+  const [email, setEmail] = useState(""); // Email pengguna
+  const [phone, setPhone] = useState(""); // Nomor telepon pengguna
+  const [password, setPassword] = useState(""); // Password Pengguna
+  const [confirmPassword, setConfirmPassword] = useState(""); // Konfirmasi Password
+  const [isSubmitting, setIsSubmitting] = useState(false); // Status apakah proses sedang berjalan
+  const router = useRouter(); // Untuk navigasi antar halaman
 
+  // Fungsi untuk proses pendaftaran
   const handleRegister = async () => {
-    if (isSubmitting) return;
+    if (isSubmitting) return; // mencegah proses berulang saat sedang berjalan
 
+    // validasi password untuk melihat kecocokan kredensial
     if (password !== confirmPassword) {
       Alert.alert("Error", "Passwords do not match");
       return;
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true); //mengubah state ke sedang memproses
 
     try {
+      // mengirim data ke server dengan post dan mengambil endpoint auth dan register
       const response = await fetch(ENDPOINTS.AUTH.REGISTER, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullname: fullName,
-          email,
-          phone_number: phone,
-          password,
-          password_confirmation: confirmPassword,
+          fullname: fullName, // mengirim nama lengkap
+          email, // mengirim email
+          phone_number: phone, // mengirim nomor telepon
+          password, // mengirim password
+          password_confirmation: confirmPassword, // mengirim konfirmasi password
         }),
       });
 
-      setIsSubmitting(false);
+      setIsSubmitting(false); // mengembalikan status sedang memprises menjadi false
 
       if (response.ok) {
+        // menampilkan pesan registrasi berhasil jika proses berhasil
         Alert.alert("Success", "Registration successful");
-        router.push("/auth/Login");
+        router.push("/auth/Login"); // pergi ke halaman login
       } else {
+        // menampilkan pesan error jika registrasi gagal
         const errorData = await response.json();
         console.error("Registration error:", errorData);
         Alert.alert("Error", "Registration failed");
       }
     } catch (error) {
-      setIsSubmitting(false);
-      console.error("Error during registration:", error);
+      // menampilkan pesan error jika proses gagal
+      setIsSubmitting(false); // mengembalikan state menjadi false
+      console.error("Error during registration:", error); // logging error saat proses gagal
       Alert.alert("Error", "An error occurred during registration");
     }
   };

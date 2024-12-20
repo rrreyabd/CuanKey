@@ -1,3 +1,20 @@
+/*
+  Komponen Setting ini digunakan untuk menampilkan halaman pengaturan, dengan fokus utama pada pengaturan notifikasi. 
+  Pengguna dapat mengaktifkan atau menonaktifkan notifikasi melalui sebuah switch yang disertai 
+  dengan mekanisme penyimpanan status notifikasi menggunakan AsyncStorage.
+*/
+
+/*
+React dan React Native:
+  Text, TouchableOpacity, View: Digunakan untuk menampilkan elemen-elemen UI dasar.
+  Switch: Komponen untuk menampilkan tombol geser yang memungkinkan pengguna mengaktifkan atau menonaktifkan notifikasi.
+Expo:
+  router: Digunakan untuk melakukan navigasi antar layar dengan expo-router.
+AsyncStorage:
+  Digunakan untuk menyimpan dan mengambil data lokal di perangkat pengguna, dalam hal ini digunakan untuk menyimpan status pengaturan notifikasi.
+FontAwesome5:
+  Digunakan untuk menampilkan ikon panah kiri pada tombol kembali.
+*/
 import { Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Switch } from "react-native-gesture-handler";
@@ -7,6 +24,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Setting = () => {
   // Notification State
+  // isNotificaationEnabled untuk menyimpan status apakah notifikasi diaktifkan atau mati
+  // toggleNotificationEnabled adalah fungsi untuk mengubah status notifikasi dan menyimpannya ke dalam AsyncStorage
   const [isNotificationEnabled, setIsNotificationEnabled] = useState<boolean>(false);
   const toggleNotificationEnabled = async () => {
     // Change Notification State

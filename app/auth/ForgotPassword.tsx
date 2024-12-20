@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native'
 import React from 'react'
 
+// menambahkan text forgot password
 const ForgotPassword = () => {
   return (
     <View>

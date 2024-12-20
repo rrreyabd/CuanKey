@@ -20,6 +20,7 @@ import {
   import PrimaryButton from "@/components/PrimaryButton";
   import EmojiPicker from "react-native-emoji-modal";
   
+  // KOMPONEN MENAMBAH BUDGET
   const AddBudget = () => {
     const [loading, setLoading] = useState(false);
   
@@ -91,14 +92,15 @@ import {
       console.log("transactionType: ", transactionType);
     }, [name, emoji, description, rawBudget, budget, transactionType]);
   
+    // MENAMBAH KATEGORI
     const handleAddCategory = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${ENDPOINTS.CATEGORY.BASE}`, {
+        const response = await fetch(`${ENDPOINTS.CATEGORY.BASE}`, { // memanggil endpoint dengan metode post
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${await getToken()}`,
+            Authorization: `Bearer ${await getToken()}`, // menunggu token untuk izin akses
           },
           body: JSON.stringify({
             name,
@@ -118,7 +120,7 @@ import {
   
         Alert.alert("Success", "Category added successfully");
         setLoading(false);
-        router.replace("/budget/Budget");
+        router.replace("/budget/Budget"); // navigasi ke halaman budget
       } catch (error) {
         console.error("Failed to add category:", error);
       }

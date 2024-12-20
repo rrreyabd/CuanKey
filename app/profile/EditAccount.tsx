@@ -1,3 +1,26 @@
+/*
+React Native Modules:
+  Alert: Menampilkan dialog notifikasi.
+  Image, Pressable, Text, TouchableOpacity, View: Membuat antarmuka pengguna.
+
+React dan Expo Modules:
+  useEffect, useMemo, useRef, useState: Mengelola state dan efek dalam komponen.
+  FontAwesome5, Feather: Ikon dari paket @expo/vector-icons.
+  Link, router: Navigasi antar halaman menggunakan expo-router.
+
+Custom Modules:
+  useAuth: Hook untuk mengakses data pengguna dan fungsi logout.
+  BackHeader: Komponen header dengan tombol kembali.
+  DangerButton: Tombol untuk tindakan berisiko seperti logout.
+  BottomSheet, BottomSheetView: Komponen lembar bawah untuk pilihan gambar profil.
+  ProfilePictureComponent: Komponen tampilan gambar profil.
+  PrimaryButton: Tombol utama untuk tindakan.
+
+Konstanta dan Utilitas:
+  getToken: Fungsi untuk mendapatkan token autentikasi.
+  ENDPOINTS: URL endpoint untuk operasi API.
+  AsyncStorage: Penyimpanan lokal data pengguna.
+*/
 import {
   Alert,
   Image,
@@ -33,9 +56,10 @@ const EditAccount = () => {
     bottomSheetRef.current?.expand();
   };
 
+  // Menampilkan gambar profil pengguna dengan opsi untuk mengubahnya.
   const handleUpdateProfilePicture = async () => {
     setIsLoading(true);
-    try {
+    try { // memanggil endpoint user untuk kebutuhan edit akun
       const response = await fetch(ENDPOINTS.USER, {
         method: "PUT",
         headers: {

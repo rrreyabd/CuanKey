@@ -20,11 +20,13 @@ import TransactionTypeDropdown from "@/components/TransactionTypeDropdown";
 import PrimaryButton from "@/components/PrimaryButton";
 import EmojiPicker from "react-native-emoji-modal";
 
+// Komponen edit anggaran
 const EditBudget = () => {
   const { id } = useGlobalSearchParams();
   const [category, setCategory] = useState<Category | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // fungsi untuk mengambil detail kategori berdasarkan ID, memanggil endpoint category
   const getCategoryDetail = async () => {
     try {
       const response = await fetch(`${ENDPOINTS.CATEGORY.BASE}/${id}`, {
@@ -44,6 +46,7 @@ const EditBudget = () => {
       console.log(JSON.stringify(json.data, null, 2));
       console.log("");
 
+      // mengupdate state dengan data kategori
       const category = json.data;
       setName(category.name);
       setEmoji(category.icon);
@@ -61,7 +64,7 @@ const EditBudget = () => {
 
   useEffect(() => {
     if (id) {
-      getCategoryDetail();
+      getCategoryDetail(); // memanggil detail kategori saat komponen dimuat
     }
   }, []);
 
@@ -70,13 +73,13 @@ const EditBudget = () => {
     return input.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
-  // Name State
+  // State dan Fungsi handler untuk input nama
   const [name, setName] = useState(category?.name);
   const handleNameChange = (input: string) => {
     setName(input);
   };
 
-  // Icon State
+  // Icon State dan fungsi untuk emoji
   const [icon, setIcon] = useState(category?.icon || "");
   const handleIconChange = (input: string) => {
     setIcon(input);
@@ -136,6 +139,8 @@ const EditBudget = () => {
     console.log("transactionType: ", transactionType);
   }, [name, emoji, description, rawBudget, budget, transactionType]);
 
+
+  // FUNGSI UNTUK MEMPERBARUI KATEGORI
   const handleUpdateCategory = async () => {
     setLoading(true);
     try {
@@ -143,13 +148,13 @@ const EditBudget = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`, // token autentikasi
         },
         body: JSON.stringify({
           name,
           icon: emoji,
           description,
-          budget: parseInt(rawBudget),
+          budget: parseInt(rawBudget), // konversi anggaran menjadi angka
           type: transactionType,
         }),
       });
@@ -169,6 +174,7 @@ const EditBudget = () => {
     }
   };
 
+  // menampilkan indikator loading jika data belum dimuat
   if (loading || !category) {
     return (
       <View className="flex-1 justify-center items-center bg-black">
