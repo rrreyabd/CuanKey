@@ -29,6 +29,7 @@ import AddWallet from "./wallet/AddWallet";
 import EditWallet from "./wallet/[id]";
 import Notification from "./notification/Notification";
 import AddRecurring from "./recurring/AddRecurring";
+import EditRecurring from "./recurring/[id]";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -152,6 +153,11 @@ export default function RootLayout() {
             <Stack.Screen
               name="recurring/AddRecurring"
               component={AddRecurring}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="recurring/[id]"
+              component={EditRecurring}
               options={{ headerShown: false }}
             />
 

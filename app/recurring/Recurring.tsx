@@ -16,6 +16,10 @@ import { ENDPOINTS } from "@/constants/api";
 import { RecurringInterface } from "@/data/types";
 
 const Recurring = () => {
+  const formatCurrency = (num: number) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   const [userRecurring, setUserRecurring] = useState<RecurringInterface[]>([]);
   const getUserRecurring = async () => {
     try {
@@ -33,7 +37,7 @@ const Recurring = () => {
 
       const json = await response.json();
       const data = json.data;
-      setUserRecurring(data)
+      setUserRecurring(data);
     } catch (error) {
       console.error("Failed to fetch user recurring transactions:", error);
       throw error;
@@ -112,7 +116,7 @@ const Recurring = () => {
                       {recurring.description}
                     </Text>
                     <Text className="font-poppinsSemibold text-vividGreen">
-                      Rp. {recurring.amount}
+                      Rp. {formatCurrency(recurring.amount)}
                     </Text>
                   </View>
 

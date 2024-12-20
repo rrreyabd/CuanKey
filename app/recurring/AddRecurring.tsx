@@ -99,7 +99,7 @@ const AddRecurring = () => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View className="flex-1 bg-black">
         <View className="px-4 py-6">
-          <BackHeader pageTitle="Add Wallet" />
+          <BackHeader pageTitle="Add Recurring Transaction" />
           <View className="gap-4 mt-8">
             {/* TRANSACTION TYPE */}
             <View className="gap-2">
