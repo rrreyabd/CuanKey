@@ -56,7 +56,7 @@ export default function Index() {
       }
 
       const json = await response.json();
-      setUserWallets(json.data);
+      setUserWallets(json.data.slice(0, 3));
       return json.data;
     } catch (error) {
       console.error("Failed to fetch user wallets:", error);
@@ -221,7 +221,7 @@ export default function Index() {
             <Text className="font-poppins text-white text-lg">My Wallet</Text>
 
             {userWallets.length > 0 ? (
-              <Link href="/" className="text-vividGreen text-lg">
+              <Link href="/wallet/Wallet" className="text-vividGreen text-lg">
                 See All
               </Link>
             ) : (
@@ -334,9 +334,14 @@ export default function Index() {
                     : Math.max(...formattedData.map((d) => d.total_expense));
 
                   // Calculate percentage
-                  const percentage = report
+                  let percentage
+                  if (highestValue === 0) {
+                    percentage = 10 
+                  } else {
+                    percentage = report
                     ? (data.total_income / highestValue) * 100
                     : (data.total_expense / highestValue) * 100;
+                  }
 
                   const handlePressBarChart = () => {
                     if (barPresed === index) {

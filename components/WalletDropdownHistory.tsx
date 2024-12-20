@@ -7,8 +7,13 @@ import { getToken } from "@/utils/auth";
 import { DropdownProps } from "@/data/types";
 
 const WalletDropdownHistory: React.FC<DropdownProps> = ({ onValueChange }) => {
-  const [value, setValue] = useState("Cash Wallet");
+  const [value, setValue] = useState("");
   const [userWallets, setUserWallets] = useState([]);
+
+  useEffect(() => {
+    console.log("value: ", value);
+    console.log("userWallets: ", JSON.stringify(userWallets, null, 2 ));
+  }, [userWallets, value]);
 
   const getUserWallets = async () => {
     try {
@@ -31,7 +36,10 @@ const WalletDropdownHistory: React.FC<DropdownProps> = ({ onValueChange }) => {
           value: wallet.id.toString(),
         })
       );
+
       setUserWallets(walletNames);
+
+      
       return json.data;
     } catch (error) {
       console.error("Failed to fetch user wallets:", error);

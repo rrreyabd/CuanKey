@@ -1,19 +1,23 @@
 import DataNotFound from "@/components/DataNotFound";
 import Navbar from "@/components/Navbar";
+import PrimaryButton from "@/components/PrimaryButton";
 import WalletDropdownHistory from "@/components/WalletDropdownHistory";
 import { ENDPOINTS } from "@/constants/api";
 import { Category } from "@/data/types";
 import { checkLoginStatus, getToken } from "@/utils/auth";
+import { LinearGradient } from "expo-linear-gradient";
 import { Link, router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Image,
+  Pressable,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 
 const Budget = () => {
   // All Transactions Amount
@@ -80,95 +84,99 @@ const Budget = () => {
 
   return (
     <View className="flex-1 bg-black">
-      <ScrollView className="py-6 px-4">
-        <View className="justify-center w-full items-center gap-4">
+      <View className="py-6 px-4">
+        <View className="justify-center w-full items-center gap-4 pb-4">
           <Text className="text-white font-poppinsBold text-xl">
             Categories
           </Text>
         </View>
 
-        {categories.length > 0 ? (
-          <View className="mt-16 gap-4">
-            <Link href="/budget/AddBudget">
-              <Text className="text-white text-lg font-poppins text-right">
-                Add Category
-              </Text>
-            </Link>
+        <Link href={"/budget/AddBudget"} className="mt-4 flex-row gap-4">
+          <Text className="text-vividGreen text-right font-poppinsSemibold text-lg">
+            + Add Category
+          </Text>
+        </Link>
 
-            {categories.map((category, index) => {
-              const totalTransaction =
-                category.total_transaction === null
-                  ? 0
-                  : category.total_transaction;
-              const budget = category.budget === null ? 0 : category.budget;
-              const percentage = (totalTransaction / budget) * 100;
-              console.log("persentase ke-" + index + ": " + percentage);
+        <ScrollView>
+          {categories.length > 0 ? (
+            <View className="gap-4 mt-4">
+              {categories.map((category, index) => {
+                const totalTransaction =
+                  category.total_transaction === null
+                    ? 0
+                    : category.total_transaction;
+                const budget = category.budget === null ? 0 : category.budget;
+                const percentage = (totalTransaction / budget) * 100;
 
-              return (
-                <View
-                  key={index}
-                  className="bg-charcoalGray rounded-md p-4 flex-row justify-between items-center"
-                >
-                  <View className="w-2/12">
-                    <Text className="text-4xl">{category.icon}</Text>
-                  </View>
-                  <View className="w-10/12 gap-2">
-                    <View className="flex-row justify-between items-center w-full">
-                      <Text className="text-white font-poppinsSemibold">
-                        {category.name}
-                      </Text>
-                      <TouchableOpacity
-                        onPress={() => {
-                          router.push(`/budget/${category.id}`);
-                        }}
-                      >
-                        <Image
-                          source={require("@/assets/icons/edit-fill.png")}
-                          style={{ width: 20, height: 20 }}
-                        />
-                      </TouchableOpacity>
+                return (
+                  <View
+                    key={index}
+                    className="bg-charcoalGray rounded-md p-4 flex-row justify-between items-center"
+                  >
+                    <View className="w-2/12">
+                      <Text className="text-4xl">{category.icon}</Text>
                     </View>
-                    <View>
-                      <View className="w-full bg-subText rounded-sm overflow-hidden h-4">
-                        <View
-                          className={`bg-vividGreen ${
-                            percentage === 0 ? "p-0" : "p-2"
-                          }`}
-                          style={{ width: `${percentage}%` }}
-                        ></View>
-                      </View>
+                    <View className="w-10/12 gap-2">
                       <View className="flex-row justify-between items-center w-full">
-                        <Text className="text-white font-poppinsSemibold text-sm">
-                          Rp{" "}
-                          {category.total_transaction
-                            ? formatCurrency(category.total_transaction)
-                            : 0}
+                        <Text className="text-white font-poppinsSemibold">
+                          {category.name}
                         </Text>
-                        <Text className="text-vividGreen font-poppinsSemibold text-sm">
-                          Rp{" "}
-                          {category.budget === null
-                            ? 0
-                            : formatCurrency(category.budget)}
-                        </Text>
+                        <TouchableOpacity
+                          onPress={() => {
+                            router.push(`/budget/${category.id}`);
+                          }}
+                        >
+                          <Image
+                            source={require("@/assets/icons/edit-fill.png")}
+                            style={{ width: 20, height: 20 }}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                      <View>
+                        <View className="w-full bg-subText rounded-sm overflow-hidden h-4">
+                          <View
+                            className={`bg-vividGreen ${
+                              percentage === 0 ? "p-0" : "p-2"
+                            }`}
+                            style={{ width: `${percentage}%` }}
+                          ></View>
+                        </View>
+                        <View className="flex-row justify-between items-center w-full">
+                          <Text className="text-white font-poppinsSemibold text-sm">
+                            Rp{" "}
+                            {category.total_transaction
+                              ? formatCurrency(category.total_transaction)
+                              : 0}
+                          </Text>
+                          <Text className="text-vividGreen font-poppinsSemibold text-sm">
+                            Rp{" "}
+                            {category.budget === null
+                              ? 0
+                              : formatCurrency(category.budget)}
+                          </Text>
+                        </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              );
-            })}
-          </View>
-        ) : (
-          // Data Not Found
-          <View className="mt-16">
-            <DataNotFound
-              title="You have no budget yet"
-              subTitle="Start budgeting smarter and reach your financial goals, one step at a time."
-              onPress={() => router.replace("/transactions/Transaction")}
-              buttonTitle="Add Budget"
-            />
-          </View>
-        )}
-      </ScrollView>
+                );
+              })}
+            </View>
+          ) : (
+            // Data Not Found
+            <View className="mt-16">
+              <DataNotFound
+                title="You have no budget yet"
+                subTitle="Start budgeting smarter and reach your financial goals, one step at a time."
+                onPress={() => router.replace("/transactions/Transaction")}
+                buttonTitle="Add Budget"
+              />
+            </View>
+          )}
+
+          <View className="h-56"></View>
+        </ScrollView>
+      </View>
+
       <Navbar />
     </View>
   );
