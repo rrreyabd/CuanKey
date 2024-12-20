@@ -20,4 +20,7 @@ export const ENDPOINTS = {
     BASE: `${API_BASE_URL}/transaction`,
     MONTHLY: `${API_BASE_URL}/transaction/monthly`,
   },
+  RECURRING: {
+    BASE: `${API_BASE_URL}/recurring`,
+  },
 };
