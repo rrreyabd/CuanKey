@@ -182,4 +182,8 @@ For further information regarding the backend of Cuankey, you can see [cuankey-b
 
 ## Screenshots
 
-TBA
+![WhatsApp Image 2024-12-21 at 09 07 28_2bf14bc6](https://github.com/user-attachments/assets/79d6aa03-68e8-4277-9f83-5ef4d9d0ca2f)
+![WhatsApp Image 2024-12-21 at 09 07 28_bf2ec853](https://github.com/user-attachments/assets/f18875c8-768c-458b-8ffb-c87237e13741)
+![WhatsApp Image 2024-12-21 at 09 07 27_6230536e](https://github.com/user-attachments/assets/23dd95e3-ea10-4c77-86de-c641d30917bf)
+
+
