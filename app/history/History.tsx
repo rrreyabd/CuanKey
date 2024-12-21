@@ -83,7 +83,7 @@ const History = () => {
     Mengatur status isFetching untuk menunjukkan proses loading
   */
   const getUserTransactions = async () => {
-    setIsFetching(true)
+    setIsFetching(true);
     try {
       const response = await fetch(ENDPOINTS.TRANSACTION.BASE, { // memanggil endpoint transaction
         method: "GET",
@@ -101,7 +101,7 @@ const History = () => {
 
       const transactions: UserTransactionProps[] = json.data;
 
-      setIsFetching(false)
+      setIsFetching(false);
       setTransactions(transactions);
     } catch (error) {
       console.error("Failed to fetch user transactions:", error);
@@ -138,17 +138,9 @@ const History = () => {
     initializeData();
   }, [activeWallet]);
 
-  if (isFetching) {
-    return (
-      <View className="flex-1 justify-center items-center bg-black">
-        <ActivityIndicator size="large" color="#00B553" />
-      </View>
-    );
-  }
-
   return (
     <View className="flex-1 bg-black">
-      <ScrollView className="py-6 px-4">
+      <View className="py-6 px-4">
         <View className="justify-center w-full items-center gap-4">
           <Text className="text-white font-poppinsBold text-xl">
             Transaction History
@@ -206,55 +198,68 @@ const History = () => {
 
         {/* Transaction History */}
         {transactions.length > 0 ? (
-          <View className="gap-4 mt-4">
-            {recentMonths.map((month, index) => {
-              const monthTransactions = transactions?.filter((transaction) => {
-                const isCorrectMonth =
-                  formatDateToMonth(transaction.transaction_date) === month;
-                const isCorrectWallet =
-                  transaction.wallet.name === activeWallet;
-                const isCorrectFilter =
-                  filterState === "All Type" ||
-                  (filterState === "Income" &&
-                    transaction.category.type === "Pemasukan") ||
-                  (filterState === "Expense" &&
-                    transaction.category.type === "Pengeluaran");
-
-                return isCorrectMonth && isCorrectWallet && isCorrectFilter;
-              });
-
-              if (monthTransactions.length === 0) {
-                return null;
-              }
-
-              return (
-                <View key={index} className="gap-2">
-                  <Text className="text-subText font-poppinsSemibold text-base uppercase">
-                    {currentMonth === month ? "This Month" : month}
-                  </Text>
-                  <View className="bg-black rounded-xl px-4">
-                    {monthTransactions.map((transaction, index) => (
-                      <HistoryTransactionComponent
-                        key={transaction.id}
-                        transactions={transaction}
-                        index={index}
-                        length={transactions.length}
-                      />
-                    ))}
-                  </View>
+          <ScrollView>
+            <View className="gap-4 mt-4">
+              {isFetching ? (
+                <View className="flex-1 h-96 justify-center items-center bg-black">
+                  <ActivityIndicator size="large" color="#00B553" />
                 </View>
-              );
-            })}
-          </View>
+              ) : (
+                recentMonths.map((month, index) => {
+                  const monthTransactions = transactions?.filter(
+                    (transaction) => {
+                      const isCorrectMonth =
+                        formatDateToMonth(transaction.transaction_date) ===
+                        month;
+                      const isCorrectWallet =
+                        transaction.wallet.name === activeWallet;
+                      const isCorrectFilter =
+                        filterState === "All Type" ||
+                        (filterState === "Income" &&
+                          transaction.category.type === "Pemasukan") ||
+                        (filterState === "Expense" &&
+                          transaction.category.type === "Pengeluaran");
+
+                      return (
+                        isCorrectMonth && isCorrectWallet && isCorrectFilter
+                      );
+                    }
+                  );
+
+                  if (monthTransactions.length === 0) {
+                    return null;
+                  }
+
+                  return (
+                    <View key={index} className="gap-2">
+                      <Text className="text-subText font-poppinsSemibold text-base uppercase">
+                        {currentMonth === month ? "This Month" : month}
+                      </Text>
+                      <View className="bg-black rounded-xl px-4">
+                        {monthTransactions.map((transaction, index) => (
+                          <HistoryTransactionComponent
+                            key={transaction.id}
+                            transactions={transaction}
+                            index={index}
+                            length={transactions.length}
+                          />
+                        ))}
+                      </View>
+                    </View>
+                  );
+                })
+              )}
+            </View>
+          </ScrollView>
         ) : (
-          <DataNotFound 
+          <DataNotFound
             title="You have no transaction yet"
             subTitle="Start adding your income and expenses to manage your money better!"
             onPress={() => router.replace("/transactions/Transaction")}
             buttonTitle="Create Transaction"
           />
         )}
-      </ScrollView>
+      </View>
       <Navbar />
     </View>
   );

@@ -77,7 +77,7 @@ const Profile = () => {
             </Link>
             
             {/* My Wallet */}
-            <Link href="/">
+            <Link href="/wallet/Wallet">
               <View className="bg-deepCharcoal flex-row justify-between w-full p-4 rounded-md">
                 <View className="gap-6 flex-row items-center">
                   <Image
@@ -109,7 +109,7 @@ const Profile = () => {
             </Link> */}
 
             {/* Recurring Transactions */}
-            <Link href="/">
+            <Link href="/recurring/Recurring">
               <View className="bg-deepCharcoal flex-row justify-between w-full p-4 rounded-md">
                 <View className="gap-6 flex-row items-center">
                   <Image

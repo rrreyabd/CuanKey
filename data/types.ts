@@ -41,10 +41,11 @@ export interface UserWallet {
     name: string;
     initial_balance: number;
     total_income: number;
-    total_outcome: number;
+    total_expense: number;
     total_balance: number;
     is_active: number;
     transactions: any[];
+    created_at: string;
     user: UserData;
 }
 
@@ -110,4 +111,34 @@ export interface Category {
     budget: number;
     type: "Pengeluaran" | "Pemasukan";
     user: UserData;
+}
+
+export interface Transaction {
+    category: string;
+    transaction_type: string;
+    date: string;
+    description: string | null;
+    amount: number;
+}
+
+export interface WalletResponse {
+    id: number;
+    name: string;
+    initial_balance: number;
+    total_income: number;
+    total_expense: number;
+    total_balance: number;
+    is_active: number;
+    transactions: Transaction[];
+    user: UserData;
+}
+
+export interface RecurringInterface {
+    id: number;
+    user: UserData;
+    wallet: WalletItem;
+    category: Category;
+    amount: number;
+    is_active: number;
+    description: string;
   }

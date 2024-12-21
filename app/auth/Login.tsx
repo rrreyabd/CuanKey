@@ -73,9 +73,9 @@ const Login = () => {
             secureTextEntry
           />
           <View className="flex flex-col justify-end">
-            <View className="self-end">
+            {/* <View className="self-end">
               <Link href="/auth/ForgotPassword" className="text-white font-poppins underline">Forgot Password?</Link>
-            </View>
+            </View> */}
           </View>
         </View>
 
@@ -96,7 +96,7 @@ const Login = () => {
         </View>
 
         <View className="mt-4">
-          <Text className="text-white text-center">
+          <Text className="text-white text-center font-poppins">
             Don’t have an account?{" "}
             <Link href="/auth/Register" className="text-green-500 underline">
               Register

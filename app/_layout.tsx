@@ -24,6 +24,12 @@ import Setting from "./setting/Setting";
 import EditBudget from "./budget/[id]";
 import Recurring from "./recurring/Recurring";
 import AddBudget from "./budget/AddBudget";
+import Wallet from "./wallet/Wallet";
+import AddWallet from "./wallet/AddWallet";
+import EditWallet from "./wallet/[id]";
+import Notification from "./notification/Notification";
+import AddRecurring from "./recurring/AddRecurring";
+import EditRecurring from "./recurring/[id]";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -121,10 +127,44 @@ export default function RootLayout() {
               options={{ headerShown: false }}
             />
 
+            {/* Wallet */}
+            <Stack.Screen
+              name="wallet/Wallet"
+              component={Wallet}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="wallet/AddWallet"
+              component={AddWallet}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="wallet/[id]"
+              component={EditWallet}
+              options={{ headerShown: false }}
+            />
+
             {/* Recurring */}
             <Stack.Screen
               name="recurring/Recurring"
               component={Recurring}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="recurring/AddRecurring"
+              component={AddRecurring}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="recurring/[id]"
+              component={EditRecurring}
+              options={{ headerShown: false }}
+            />
+
+            {/* Notification */}
+            <Stack.Screen
+              name="notification/Notification"
+              component={Notification}
               options={{ headerShown: false }}
             />
 

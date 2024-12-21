@@ -131,7 +131,7 @@ const Register = () => {
 
         {/* Login Link */}
         <View className="mt-6">
-          <Text className="text-white/75 text-center">
+          <Text className="text-white/75 text-center font-poppins">
             Already have an account?{" "}
             <Link
               href="/auth/Login"
