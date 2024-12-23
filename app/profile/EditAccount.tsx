@@ -44,7 +44,9 @@ import { ENDPOINTS } from "@/constants/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EditAccount = () => {
+  // mengambil data user, fungsi logout, dan fungsi mengatur ulang data pengguna dari contoh autentikasi
   const { user, handleLogout, setUserData } = useAuth();
+  // refefrensi untuk komponen bottomsheet, (modal yang dapat diperluas)
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ["100%"], []);
   const [selectedProfilePicture, setSelectedProfilePicture] = useState<
@@ -58,7 +60,7 @@ const EditAccount = () => {
 
   // Menampilkan gambar profil pengguna dengan opsi untuk mengubahnya.
   const handleUpdateProfilePicture = async () => {
-    setIsLoading(true);
+    setIsLoading(true); // mengaktifkan indikator loading
     try { // memanggil endpoint user untuk kebutuhan edit akun
       const response = await fetch(ENDPOINTS.USER, {
         method: "PUT",
@@ -77,16 +79,19 @@ const EditAccount = () => {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
+      // parse data JSON dari respons server
       const data = await response.json();
-      console.log(data);
+      console.log(data); // menampilkan data respons di konsol untuk di debug
       await AsyncStorage.setItem("userData", JSON.stringify(data.data));
       setUserData(data.data);
       Alert.alert("Success", "Profile picture updated successfully");
       router.back();
+      // menangkap error dan menampilkan pesan error
     } catch (error) {
       console.error("Error updating profile:", error);
       Alert.alert("Error", "An error occurred while updating profile");
     } finally {
+      // memastikan indikator loading dimatikan setelah proses selesai
       setIsLoading(false);
     }
   };

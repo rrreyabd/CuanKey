@@ -15,14 +15,21 @@ import { getToken } from "@/utils/auth";
 import { ENDPOINTS } from "@/constants/api";
 import { RecurringInterface } from "@/data/types";
 
+// komponen utama untuk menampilkan daftar transaksi berulan
 const Recurring = () => {
+  // fungsi untuk memformat angka menjadi mata uang
   const formatCurrency = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
+
+  // state untuk menyimpan data transaksi berulang pengguna
   const [userRecurring, setUserRecurring] = useState<RecurringInterface[]>([]);
+
+  // fungsi untuk mengambil data transaksi berulang pengguna dari server
   const getUserRecurring = async () => {
     try {
+      // memanggil endpoint api untuk mendapatkan data transaksi berulang
       const response = await fetch(`${ENDPOINTS.RECURRING.BASE}`, {
         method: "GET",
         headers: {
@@ -44,10 +51,12 @@ const Recurring = () => {
     }
   };
 
+  //mengambil data transaksi berulang saat komponen pertama kali dirender
   useEffect(() => {
     getUserRecurring();
   }, []);
 
+  // fungsi untuk menangani penghapusan tranksaksi berulang
   const handleDeleteRecurring = async (id: number) => {
     Alert.alert(
       "Confirm Deletion",
@@ -61,6 +70,7 @@ const Recurring = () => {
           text: "Delete",
           onPress: async () => {
             try {
+              // memanggil endpoing untuk menghapus transaksi berulang
               const response = await fetch(
                 `${ENDPOINTS.RECURRING.BASE}/${id}`,
                 {
@@ -94,6 +104,7 @@ const Recurring = () => {
           },
         },
       ],
+      // Dialog tidak dapat ditutup tanpa memilih salah satu tombol
       { cancelable: false }
     );
   };

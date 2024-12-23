@@ -154,7 +154,6 @@ export default function Index() {
     const initializeData = async () => {
       const token = await getToken();
       console.log(token);
-
       try {
         const loggedIn = await checkLoginStatus();
         if (!loggedIn) {
