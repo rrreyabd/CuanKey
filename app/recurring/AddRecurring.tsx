@@ -18,12 +18,12 @@ import CategoryDropdown from "@/components/CategoryDropdown";
 import WalletDropdown from "@/components/WalletDropdown";
 
 const AddRecurring = () => {
-  // Format Currency
+  // Format Currency, mengubah angka menjadi format mata uang
   const formatCurrency = (input: string) => {
     return input.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
-  // Form State
+  // Form State untuk form input
   const [wallet, setWallet] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -32,6 +32,8 @@ const AddRecurring = () => {
   // Budget State
   const [rawAmount, setRawAmount] = useState("0");
   const [amount, setAmount] = useState<string>("0");
+
+  //fungsi untuk menangani perubahan input jumlah transaksi
   const handleAmountChange = (input: string) => {
     if (input === "") {
       setRawAmount("0");
@@ -48,23 +50,26 @@ const AddRecurring = () => {
 
     setAmount(formatCurrency(rawInput));
   };
-
+  // fungis menangani perubahan kategori
   const handleTransactionTypeChange = (value: string | null): void => {
     setTransactionType(value ?? "");
   };
 
+// fungsi menangani perubahan kategori
   const handleCategoryChange = (value: string | null): void => {
     setCategory(value ?? "");
   };
-
+//fungsi menangani perubahan dompet
   const handleWalletChange = (value: string | null): void => {
     setWallet(value ?? "");
   };
 
+  //state menambahkan apakah proses pengiriman form sedang berlangsung
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleSubmitRecurring = async () => {
-    setIsSubmitting(true);
+    setIsSubmitting(true); // menandai bahwa proses sedang berlangsung
     try {
+      // memanggil endppoint API untuk menambahkan transaksi berulang
       const response = await fetch(ENDPOINTS.RECURRING.BASE, {
         method: "POST",
         headers: {
@@ -79,10 +84,12 @@ const AddRecurring = () => {
         }),
       });
 
+      //jika response tidak berhasil, lemparkan error
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
+      // menampilkan parsing respons json dari server
       const data = await response.json();
       console.log(data);
       Alert.alert("Success", "Recurring transaction added successfully");

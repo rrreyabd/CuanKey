@@ -4,9 +4,14 @@ import BackHeader from "@/components/BackHeader";
 import DangerButton from "@/components/DangerButton";
 import { useAuth } from "@/context/AuthContext";
 
+/*
+  KOMPONEN UTAMA UNTUK HALAMAN DELETE ACCOUNT
+*/
 const DeleteAccount = () => {
+  // mengambil fungsi handleDeleteAccount dari context autentikasi
   const { handleDeleteAccount } = useAuth();
   return (
+    // tampilan utama dengan warna belatar hitam dan menggunakan flexbox
     <View className="bg-black flex-1">
       <View className=" py-6 px-4">
         <BackHeader pageTitle="Delete Account" />
@@ -37,7 +42,7 @@ const DeleteAccount = () => {
     </View>
   );
 };
-
+// mengekspor komponen delete account agar dapat ditampilkan di tempat lain
 export default DeleteAccount;
 
 const consequences = [
@@ -46,6 +51,7 @@ const consequences = [
   "Any personalized settings and preferences in the app.",
 ];
 
+// komponen untuk mengampilkan daftar dengan bulletin
 const UnorderedList = (children: string) => {
   return (
     <View className="flex-row items-start gap-2">

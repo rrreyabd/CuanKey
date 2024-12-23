@@ -29,7 +29,7 @@ Meet the team that made this project possible:
 | Alwin Liufandy                  | 221402037   | [Winzliu](https://github.com/Winzliu)                     | Back-End Developer                  |
 | Devandra Deal Fatahilah         | 221402040   | [devandra1112](https://github.com/devandra1112)           | UI/UX & Technical Writer            |
 | Jessindy Tanuwijaya             | 221402062   | [jessdytan](https://github.com/jessdytan)                 | UI/UX & Back-End Developer          |
-| Julyant Anggara                 | 221402109   | [julyantanggara](https://github.com/julyantanggara)       | Technical Writer                    |
+| Julyant Anggara                 | 221402109   | [julyantanggara](https://github.com/julyantanggara)       | Technical Writer & PPT                   |
 
 We worked together to bring this project to life and continue to maintain and improve it.
 
