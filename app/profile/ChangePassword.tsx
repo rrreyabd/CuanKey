@@ -1,3 +1,20 @@
+/*
+React Native Modules:
+  Alert: Menampilkan notifikasi dialog ke pengguna.
+  View: Container untuk tata letak komponen.
+React Modules:
+  useState: Hook untuk menyimpan dan mengelola status komponen.
+Custom Components:
+  BackHeader: Komponen untuk menampilkan header dengan tombol kembali.
+  Input: Komponen input teks untuk mengedit data.
+  PrimaryButton: Komponen tombol utama untuk tindakan.
+Custom Context:
+  useAuth: Hook untuk mengakses konteks autentikasi pengguna.
+Konstanta dan Utils:
+  ENDPOINTS: Berisi URL endpoint API.
+  getToken: Fungsi untuk mendapatkan token autentikasi.
+*/
+
 import { Alert, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import BackHeader from "@/components/BackHeader";
@@ -7,6 +24,15 @@ import { ENDPOINTS } from "@/constants/api";
 import { getToken } from "@/utils/auth";
 import { useAuth } from "@/context/AuthContext";
 
+
+/*
+State Management
+  oldPassword: Menyimpan kata sandi lama yang dimasukkan pengguna.
+  password: Menyimpan kata sandi baru yang dimasukkan pengguna.
+  confirmPassword: Menyimpan konfirmasi kata sandi baru.
+  passwordStrength: Menyimpan kekuatan kata sandi baru (Weak, Medium, atau Strong).
+  isSubmitting: Status boolean untuk menunjukkan apakah proses pengiriman data sedang berlangsung.
+*/
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +41,7 @@ const ChangePassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { handleLogout } = useAuth();
 
+  // Menghitung kekuatan kata sandi setiap kali nilai password berubah.
   useEffect(() => {
     if (password.length < 8) {
       setPasswordStrength("Weak");
@@ -29,10 +56,12 @@ const ChangePassword = () => {
     }
   }, [password]);
 
+  // fungsi mengirimkan data perubahan kata sandi ke server
   const handleUpdatePassword = async () => {
     setIsSubmitting(true);
 
     try {
+      // menyesuaikan password sesuai kredensial dengan endpoint update password
       if (password.length > 0) {
         if (confirmPassword) {
           if (password === confirmPassword) {

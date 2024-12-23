@@ -29,6 +29,7 @@ const Budget = () => {
   const getUserCategory = async () => {
     setIsFetching(true);
     try {
+      // memanggil endpoint dengan metode get dari api laravel untuk melihat semua kategori user
       const response = await fetch(ENDPOINTS.CATEGORY.BASE, {
         method: "GET",
         headers: {

@@ -1,10 +1,19 @@
-import {
-  Text,
-  Pressable,
-  View,
-  StatusBar,
-  ActivityIndicator,
-} from "react-native";
+/*
+React Native Core Components:
+  Text, Pressable, View, ActivityIndicator: Digunakan untuk membangun antarmuka pengguna.
+  ScrollView: Untuk memungkinkan scrolling pada konten yang panjang.
+Custom Components:
+  Navbar: Navigasi bawah aplikasi.
+  WalletDropdownHistory: Dropdown untuk memilih dompet aktif.
+  HistoryTransactionComponent: Komponen individual untuk menampilkan transaksi.
+  DataNotFound: Menampilkan pesan ketika tidak ada data.
+Utility & Constants:
+  ENDPOINTS: URL API untuk mengakses data transaksi.
+  checkLoginStatus, getToken: Fungsi utilitas untuk otentikasi pengguna.
+Router:
+  router: Digunakan untuk navigasi antarhalaman.
+*/
+import { Text, Pressable, View, StatusBar, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import { ScrollView } from "react-native-gesture-handler";
@@ -16,7 +25,15 @@ import { router } from "expo-router";
 import HistoryTransactionComponent from "@/components/HistoryTransactionComponent";
 import DataNotFound from "@/components/DataNotFound";
 
+// KOMPONEN HISTORY
 const History = () => {
+  /*
+    filterState: Menyimpan filter aktif (All Type, Income, atau Expense).
+    activeWallet: Dompet aktif untuk filter.
+    transactions: Menyimpan data transaksi dari API.
+    user: Menyimpan data pengguna.
+    isFetching: Status loading saat memuat data.
+  */
   const [filterState, setFilterState] = useState("All Type");
   const [activeWallet, setActiveWallet] = useState("Cash Wallet");
   const [transactions, setTransactions] = useState<UserTransactionProps[]>([]);
@@ -41,6 +58,9 @@ const History = () => {
     "December",
   ];
 
+  /*
+    mengembalikan array bulan terbaru hingga 12 bulan ke belakang
+  */
   const getRecentMonths = (currentMonthIndex: number) => {
     const recentMonths = [];
     for (let i = 0; i < 12; i++) {
@@ -58,14 +78,18 @@ const History = () => {
   };
 
   // Get User Transactions
+  /*
+    Mendapatkan semua transaksi pengguna dari API.
+    Mengatur status isFetching untuk menunjukkan proses loading
+  */
   const getUserTransactions = async () => {
     setIsFetching(true);
     try {
-      const response = await fetch(ENDPOINTS.TRANSACTION.BASE, {
+      const response = await fetch(ENDPOINTS.TRANSACTION.BASE, { // memanggil endpoint transaction
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`, // menunggu token autentikasi
         },
       });
 
@@ -85,10 +109,13 @@ const History = () => {
     }
   };
 
+  //memperbarui dompet berdasarkan input pengguna
   const handleWalletChange = (value: string | null): void => {
     setActiveWallet(value ?? "");
   };
-
+  /*
+    mengecek status login, memuat data transaksi, menginisialisasi komponen
+  */
   useEffect(() => {
     const initializeData = async () => {
       const token = await getToken();

@@ -1,3 +1,26 @@
+/*
+React Native Modules:
+  View, Text, Button, Image, ScrollView, Pressable: Membuat antarmuka pengguna.
+
+React dan Expo Modules:
+  Link, useRouter: Mendukung navigasi menggunakan expo-router.
+
+Custom Modules: 
+  useAuth: Hook untuk mendapatkan data pengguna saat ini.
+  Navbar: Komponen navigasi bawah untuk berpindah antar halaman.
+  ProfilePictureComponent: Komponen untuk menampilkan dan/atau mengubah gambar profil pengguna.
+
+Utilitas dan Konstanta:
+  getToken: Fungsi untuk mengambil token autentikasi dari penyimpanan.
+
+ENDPOINTS: Konstanta URL API yang digunakan untuk permintaan server.
+  AsyncStorage: Modul penyimpanan data lokal.
+  
+Ikon:
+  FontAwesome5: Perpustakaan ikon untuk menambahkan ikon estetis ke antarmuka pengguna.
+
+*/
+
 import React from "react";
 import { View, Text, Button, Image, ScrollView, Pressable } from "react-native";
 import { Link, useRouter } from "expo-router";

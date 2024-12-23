@@ -7,40 +7,49 @@ import HeaderAuth from "@/components/auth/HeaderAuth";
 import { useAuth } from "@/context/AuthContext";
 import { ENDPOINTS } from "@/constants/api";
 
+// Komponen login sebagai layar untuk autentikasi pengguna
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login } = useAuth();
-  const router = useRouter();
+  // state untuk menyimpan input email dan password user
+  const [email, setEmail] = useState(""); // input email
+  const [password, setPassword] = useState(""); // input password
+  const [isSubmitting, setIsSubmitting] = useState(false); // menunjukkan apakah form sedang diproses
+  const { login } = useAuth(); // mengambil fungsi login dari konteks autentikasi
+  const router = useRouter(); // digunakan untuk navigasi antar halaman
 
+  // fungsi untuk menangani login pengguna
   const handleLogin = async () => {
-    if (isSubmitting) return;
+    if (isSubmitting) return; // mencegah proses ganda saat form diproses
 
-    setIsSubmitting(true);
+    setIsSubmitting(true); // mengubah state menjadi sedang diproses
     try {
+      //  melakukan request POST ke endpoin login (api backend)
       const response = await fetch(ENDPOINTS.AUTH.LOGIN, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" }, // header untuk menginformasikan data dalam format json
+        body: JSON.stringify({ email, password }), // data login dikirim ke server
       });
 
-      setIsSubmitting(false);
+      setIsSubmitting(false); // mengembalikan state sedang memproses menjadi false
 
       if (response.ok) {
+        // mengambil data dari response server
         const { data } = await response.json();
 
         if (data.token) {
-          await login(data.token, data);
-          router.replace("/");
+          // jika token berhasil diterima, pengguna berhasil login
+          await login(data.token, data); // menyimpan token dan informasi pengguna di konteks autentikasi
+          router.replace("/"); // navigasi ke halaman utama
         } else {
+          // pesan error jika token tidak ditemukan
           Alert.alert("Error", "Token not found");
         }
       } else {
+        //pesan error jika login tidak berhasil
         Alert.alert("Error", "Login failed");
       }
     } catch (error) {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // state kembali menjadi false
+      //pesan error jika terjadi kesalahan proses
       Alert.alert("Error", "An error occurred during login");
     }
   };
